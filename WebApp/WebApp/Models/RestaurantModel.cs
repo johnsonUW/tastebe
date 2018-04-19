@@ -1,0 +1,13 @@
+﻿namespace WebApp.Models
+{
+    public class RestaurantModel
+    {
+        public int Id { get; set; }
+        public string CloverId { get; set; }
+        public string Name { get; set; }
+        public string Location { get; set; }
+        public string Phone { get; set; }
+        public string Owner { get; set; }
+        public string ImageUrl { get; set; }
+    }
+}
