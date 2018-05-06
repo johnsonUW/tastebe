@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -258,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\taste - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\TasteService - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
