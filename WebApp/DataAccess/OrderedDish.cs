@@ -20,8 +20,5 @@ namespace DataAccess
         public long Id { get; set; }
         public string OrderId { get; set; }
         public int CuisineId { get; set; }
-    
-        public virtual Dish Dish { get; set; }
-        public virtual User User { get; set; }
     }
 }

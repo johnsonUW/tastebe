@@ -14,17 +14,8 @@ namespace DataAccess
     
     public partial class Cuisine
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cuisine()
-        {
-            this.Dishes = new HashSet<Dish>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Taste { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Dish> Dishes { get; set; }
     }
 }

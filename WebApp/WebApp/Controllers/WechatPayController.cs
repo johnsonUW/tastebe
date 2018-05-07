@@ -26,7 +26,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> InitializePayment(PaymentRequestModel model)
         {
-            using (var context = new Taste())
+            using (var context = new TasteContext())
             {
                 var order = context.Orders.FirstOrDefault(o => o.OrderId == model.OrderId && o.UserId == model.UserId);
                 if (order == null || order.Paid) return Ok(GetErrorModel(ApiErrorCode.OrderDoesNotExist));
@@ -90,7 +90,7 @@ namespace WebApp.Controllers
         public async Task<IHttpActionResult> CompletePayment(WechatPaymentNotificationModel notification)
         {
             if (notification == null || !notification.IsValid()) return Ok(GetErrorModel(ApiErrorCode.InvalidData));
-            using (var context = new Taste())
+            using (var context = new TasteContext())
             {
                 var payment = context.Payments.FirstOrDefault(o => o.TransactionId == notification.TransactionId);
                 if (payment == null || payment.Success) return Ok();

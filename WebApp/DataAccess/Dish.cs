@@ -14,12 +14,6 @@ namespace DataAccess
     
     public partial class Dish
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Dish()
-        {
-            this.OrderedDishes = new HashSet<OrderedDish>();
-        }
-    
         public int Id { get; set; }
         public int RestaurantId { get; set; }
         public Nullable<int> CuisineId { get; set; }
@@ -30,10 +24,7 @@ namespace DataAccess
         public string Category { get; set; }
         public double Price { get; set; }
         public string Image { get; set; }
-    
-        public virtual Cuisine Cuisine { get; set; }
-        public virtual Restaurant Restaurant { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderedDish> OrderedDishes { get; set; }
+        public bool Deleted { get; set; }
+        public string CloverId { get; set; }
     }
 }

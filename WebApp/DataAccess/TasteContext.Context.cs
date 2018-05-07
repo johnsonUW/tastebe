@@ -13,10 +13,10 @@ namespace DataAccess
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Taste : DbContext
+    public partial class TasteContext : DbContext
     {
-        public Taste()
-            : base("name=Taste")
+        public TasteContext()
+            : base("name=TasteContext")
         {
         }
     
@@ -29,9 +29,9 @@ namespace DataAccess
         public virtual DbSet<Dish> Dishes { get; set; }
         public virtual DbSet<OrderedDish> OrderedDishes { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Preference> Preferences { get; set; }
         public virtual DbSet<Restaurant> Restaurants { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Payment> Payments { get; set; }
     }
 }

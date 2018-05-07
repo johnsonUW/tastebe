@@ -17,7 +17,7 @@ namespace WebApp.Controllers
         [HttpGet]
         public IHttpActionResult GetUserPreferences(string userId, string restaurantId)
         {
-            using (var context = new Taste())
+            using (var context = new TasteContext())
             {
                 var pref = context.Preferences.Where(p => p.UserId == userId).OrderByDescending(p => p.Count).ToList();
                 if (!pref.Any()) return Ok();
@@ -25,7 +25,7 @@ namespace WebApp.Controllers
                 var dishes = new List<DishModel>();
                 foreach (var p in pref)
                 {
-                    var newDishes = context.Dishes.Where(d => d.Cuisine.Id == p.CuisineId);
+                    var newDishes = context.Dishes.Where(d => d.CuisineId == p.CuisineId);
                     foreach (var d in newDishes)
                     {
                         dishes.Add(ToModel(d));

@@ -17,11 +17,9 @@ namespace DataAccess
         public int Id { get; set; }
         public string UserId { get; set; }
         public string Ingredients { get; set; }
+        public Nullable<int> CuisineId { get; set; }
         public string Dishes { get; set; }
         public string Flavors { get; set; }
         public int Count { get; set; }
-        public Nullable<int> CuisineId { get; set; }
-    
-        public virtual User User { get; set; }
     }
 }

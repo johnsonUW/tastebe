@@ -14,13 +14,6 @@ namespace DataAccess
     
     public partial class Restaurant
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Restaurant()
-        {
-            this.Dishes = new HashSet<Dish>();
-            this.Orders = new HashSet<Order>();
-        }
-    
         public int Id { get; set; }
         public string CloverId { get; set; }
         public string Name { get; set; }
@@ -31,10 +24,5 @@ namespace DataAccess
         public string AccessToken { get; set; }
         public bool IsSandbox { get; set; }
         public double ExchangeRate { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Dish> Dishes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }

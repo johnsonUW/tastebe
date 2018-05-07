@@ -26,7 +26,7 @@ namespace WebApp.Controllers
         {
             if (code.IsNullOrWhiteSpace()) return Ok(GetErrorModel(ApiErrorCode.SessionExpired));
             var session = await WeChatHttpClient.GetSessionAsync(code, ConfigurationManager.AppSettings.Get("WeChatMiniProgramAppId"), ConfigurationManager.AppSettings.Get("WeChatMiniProgramAppSecret"));
-            using (var context = new Taste())
+            using (var context = new TasteContext())
             {
                 var user = context.Users.FirstOrDefault(u => string.Equals(u.UserId, session.OpenId));
                 if (user != null)

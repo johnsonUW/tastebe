@@ -20,7 +20,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> SubmitOrder(OrderRequestModel model)
         {
-            using (var context = new Taste())
+            using (var context = new TasteContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.UserId == model.UserId);
                 if (user == null) return Ok(GetErrorModel(ApiErrorCode.UserDoesNotExist));
@@ -103,7 +103,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public IHttpActionResult PayInCashOrCredit(PaymentRequestModel model)
         {
-            using (var context = new Taste())
+            using (var context = new TasteContext())
             {
                 var order = context.Orders.FirstOrDefault(o => o.OrderId == model.OrderId);
                 if (order != null)

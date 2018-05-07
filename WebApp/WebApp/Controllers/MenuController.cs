@@ -16,13 +16,13 @@ namespace WebApp.Controllers
         [Route("{restaurantId}")]
         public IHttpActionResult GetMenuByRestaurantId(int restaurantId)
         {
-            using (var context = new Taste())
+            using (var context = new TasteContext())
             {
                 var menu = new List<MenuModel>();
                 var cuisine = context.Cuisines.ToList();
                 foreach (var c in cuisine)
                 {
-                    var dishes = context.Dishes.Where(d => d.CuisineId == c.Id && d.RestaurantId == restaurantId);
+                    var dishes = context.Dishes.Where(d => d.CuisineId == c.Id && d.RestaurantId == restaurantId && !d.Deleted);
                     if (!dishes.Any()) continue;
                     var items = new List<DishModel>();
                     foreach (var d in dishes)

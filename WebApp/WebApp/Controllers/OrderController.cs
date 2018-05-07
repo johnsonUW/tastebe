@@ -17,7 +17,7 @@ namespace WebApp.Controllers
         [Route("{userId}")]
         public IHttpActionResult GetOrderHistoryById(string userId, int restaurantId)
         {
-            using (var context = new Taste())
+            using (var context = new TasteContext())
             {
                 var list = new List<OrderHistoryModel>();
                 var orders = context.Orders.Where(o => o.UserId == userId && o.RestaurantId == restaurantId).ToList();
@@ -46,7 +46,7 @@ namespace WebApp.Controllers
         [Route]
         public IHttpActionResult GetOrderHistoryByOrderId(OrderHistoryModel model)
         {
-            using (var context = new Taste())
+            using (var context = new TasteContext())
             {
                 var order = context.Orders.FirstOrDefault(o => o.OrderId == model.OrderId);
                 if (order == null) return Ok(GetErrorModel(ApiErrorCode.OrderDoesNotExist));

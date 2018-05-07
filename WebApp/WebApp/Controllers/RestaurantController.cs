@@ -15,7 +15,7 @@ namespace WebApp.Controllers
         [HttpGet]
         public IHttpActionResult GetAllRestaurants()
         {
-            using (var context = new Taste())
+            using (var context = new TasteContext())
             {
                 var list = new List<RestaurantModel>();
                 foreach (var r in context.Restaurants)
@@ -30,7 +30,7 @@ namespace WebApp.Controllers
         [HttpGet]
         public IHttpActionResult GetRestaurantById(int id)
         {
-            using (var context = new Taste())
+            using (var context = new TasteContext())
             {
                 var res = context.Restaurants.FirstOrDefault(r => r.Id == id);
                 if (res != null) return Ok(ToModel(res));

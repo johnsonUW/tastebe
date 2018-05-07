@@ -4,22 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5b7ab2dfb9d04418bd0f9fcdb131c6bb" Name="Diagram1">
-        <EntityTypeShape EntityType="TasteContext.Cuisine" Width="1.5" PointX="1.5" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="TasteContext.Dish" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TasteContext.OrderedDish" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TasteContext.Order" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="TasteContext.Preference" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TasteContext.Restaurant" Width="1.5" PointX="1.5" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TasteContext.User" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
-        <AssociationConnector Association="TasteContext.FK_Dishes_ToCuisine" ManuallyRouted="false" />
-        <AssociationConnector Association="TasteContext.FK_Dishes_ToRestaurants" ManuallyRouted="false" />
-        <AssociationConnector Association="TasteContext.FK_OrderedDishes_Dishes" ManuallyRouted="false" />
-        <AssociationConnector Association="TasteContext.FK_OrderedDishes_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="TasteContext.FK_OrderDetails_ToRestaurant" ManuallyRouted="false" />
-        <AssociationConnector Association="TasteContext.FK_Orders_ToUser" ManuallyRouted="false" />
-        <AssociationConnector Association="TasteContext.FK_Preference_ToUsers" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="TasteContext.Payment" Width="1.5" PointX="3.375" PointY="0.75" />
+      <Diagram DiagramId="735f4ed51459480d9500e97a6ffead7e" Name="Diagram1">
+        <EntityTypeShape EntityType="Taste.Cuisine" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taste.Dish" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taste.OrderedDish" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taste.Order" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taste.Payment" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taste.Preference" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taste.Restaurant" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taste.User" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

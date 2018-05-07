@@ -23,8 +23,5 @@ namespace DataAccess
         public string Details { get; set; }
         public bool Paid { get; set; }
         public string TableName { get; set; }
-    
-        public virtual Restaurant Restaurant { get; set; }
-        public virtual User User { get; set; }
     }
 }
