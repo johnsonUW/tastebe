@@ -24,6 +24,7 @@ namespace Framework.Clover
 
         public static async Task<List<CloverItemModel>> GetItemsAsync(string accessToken, string merchantId, bool sandboxMode = false)
         {
+            if (accessToken == null) return new List<CloverItemModel>();
             var client = GetClient(sandboxMode, accessToken);
             var response = await client.GetAsync($"v3/merchants/{merchantId}/items");
             var model = await response.ProcessReponse<CloverMenuModel>();

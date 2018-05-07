@@ -20,11 +20,10 @@ namespace WebApp.Controllers
         {
             using (var context = new TasteContext())
             {
-                var restaurants = context.Restaurants;
+                var restaurants = context.Restaurants.ToList();
                 foreach(var restaurant in restaurants)
                 {
                     var restaurantId = restaurant.Id;
-                    if (restaurant == null) return Ok();
                     var result = await CloverClient.GetItemsAsync(restaurant.AccessToken, restaurant.CloverId, restaurant.IsSandbox);
 
                     var existingMenu = context.Dishes.Where(d => !d.Deleted && d.RestaurantId == restaurantId).ToList();
