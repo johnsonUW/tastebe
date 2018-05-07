@@ -14,7 +14,7 @@ namespace WebApp.Controllers
     [RoutePrefix("api/v1/admin")]
     public class AdminController : BaseController
     {
-        [HttpPost]
+        [HttpGet]
         [Route("sync")]
         public async Task<IHttpActionResult> SyncWithClover()
         {
