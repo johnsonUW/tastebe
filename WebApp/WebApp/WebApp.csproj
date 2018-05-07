@@ -259,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\taste - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\tasteservice - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\TasteService - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
