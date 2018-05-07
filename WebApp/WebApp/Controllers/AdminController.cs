@@ -16,45 +16,48 @@ namespace WebApp.Controllers
     {
         [HttpPost]
         [Route("sync")]
-        public async Task<IHttpActionResult> SyncWithClover(int restaurantId, string adminName, string adminPassword)
+        public async Task<IHttpActionResult> SyncWithClover()
         {
-            if (adminPassword != "password" || adminName != "taste") return Ok();
             using (var context = new TasteContext())
             {
-                var restaurant = context.Restaurants.FirstOrDefault(r => r.Id == restaurantId);
-                if (restaurant == null) return Ok();
-                var result = await CloverClient.GetItemsAsync(restaurant.AccessToken, restaurant.CloverId, restaurant.IsSandbox);
-
-                var existingMenu = context.Dishes.Where(d => !d.Deleted && d.RestaurantId == restaurantId).ToList();
-                var ids = existingMenu.Select(d => d.CloverId).ToList();
-                ids.RemoveAll(s => s == null);
-
-                var newMenu = result.Select(r => r.Id).ToList();
-
-                var itemsToBeDeleted = ids.Where(m => !newMenu.Contains(m)).ToList();
-                var itemsToBeAdded = newMenu.Where(m => !ids.Contains(m)).ToList();
-
-                foreach (var i in itemsToBeAdded)
+                var restaurants = context.Restaurants;
+                foreach(var restaurant in restaurants)
                 {
-                    var r = result.First(re => re.Id == i);
-                    context.Dishes.Add(new Dish
+                    var restaurantId = restaurant.Id;
+                    if (restaurant == null) return Ok();
+                    var result = await CloverClient.GetItemsAsync(restaurant.AccessToken, restaurant.CloverId, restaurant.IsSandbox);
+
+                    var existingMenu = context.Dishes.Where(d => !d.Deleted && d.RestaurantId == restaurantId).ToList();
+                    var ids = existingMenu.Select(d => d.CloverId).ToList();
+                    ids.RemoveAll(s => s == null);
+
+                    var newMenu = result.Select(r => r.Id).ToList();
+
+                    var itemsToBeDeleted = ids.Where(m => !newMenu.Contains(m)).ToList();
+                    var itemsToBeAdded = newMenu.Where(m => !ids.Contains(m)).ToList();
+
+                    foreach (var i in itemsToBeAdded)
                     {
-                        Name = r.Name,
-                        Price = r.Price / 100.0,
-                        CuisineId = -1,
-                        RestaurantId = restaurantId,
-                        CloverId = r.Id,
-                        Deleted = false
-                    });
-                }
+                        var r = result.First(re => re.Id == i);
+                        context.Dishes.Add(new Dish
+                        {
+                            Name = r.Name,
+                            Price = r.Price / 100.0,
+                            CuisineId = -1,
+                            RestaurantId = restaurantId,
+                            CloverId = r.Id,
+                            Deleted = false
+                        });
+                    }
 
-                foreach (var i in itemsToBeDeleted)
-                {
-                    var r = existingMenu.First(re => re.CloverId == i);
-                    context.Dishes.Remove(r);
-                }
+                    foreach (var i in itemsToBeDeleted)
+                    {
+                        var r = existingMenu.First(re => re.CloverId == i);
+                        context.Dishes.Remove(r);
+                    }
 
-                context.SaveChanges();
+                    context.SaveChanges();
+                }
             }
             return Ok();
         }
