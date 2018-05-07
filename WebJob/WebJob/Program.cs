@@ -18,7 +18,7 @@ namespace WebJob
         public static void SyncNewDishesFromClover()
         {
             string html = string.Empty;
-            string url = @"https://tasteservice.azurewebsites.net/api/v1/admin/sync";
+            string url = @"https://tasteservice.chinacloudsites.cn/api/v1/admin/sync";
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.AutomaticDecompression = DecompressionMethods.GZip;
