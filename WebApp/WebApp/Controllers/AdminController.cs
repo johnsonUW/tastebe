@@ -15,8 +15,8 @@ namespace WebApp.Controllers
     public class AdminController : BaseController
     {
         [HttpPost]
-        [Route("CreateLogin")]
-        public IHttpActionResult CreateLogin(string username, string password)
+        [Route("createLogin")]
+        public IHttpActionResult CreateLogin(string username, string password, string name, string location, string phone, string owner, string cloverId, string accessToken)
         {
             using (var context = new TasteContext())
             {
@@ -25,13 +25,28 @@ namespace WebApp.Controllers
                     Username = username,
                     Password = password
                 });
+
+                var res = context.Restaurants.ToList();
+                context.Restaurants.Add(new Restaurant()
+                {
+                    CloverId = cloverId,
+                    Name = name,
+                    Location = location,
+                    Phone = phone,
+                    Owner = owner,
+                    Image = "",
+                    AccessToken = accessToken,
+                    ExchangeRate = 6.5,
+                    IsSandbox = false
+                });
+                context.SaveChanges();
             }
 
             return Ok("Success");
         }
 
         [HttpPost]
-        [Route("Login")]
+        [Route("login")]
         public IHttpActionResult LoginAccount(string username, string password)
         {
             using (var context = new TasteContext())
