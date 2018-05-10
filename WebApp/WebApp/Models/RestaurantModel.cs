@@ -9,5 +9,8 @@
         public string Phone { get; set; }
         public string Owner { get; set; }
         public string ImageUrl { get; set; }
+        public string AccessToken { get; set; }
+        public bool IsSandbox { get; set; }
+        public double ExchangeRate { get; set; }
     }
 }

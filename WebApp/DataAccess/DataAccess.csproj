@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admins.cs">
+      <DependentUpon>TasteContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Cuisine.cs">
       <DependentUpon>TasteContext.tt</DependentUpon>
     </Compile>

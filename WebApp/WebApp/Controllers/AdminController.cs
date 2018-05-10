@@ -14,6 +14,40 @@ namespace WebApp.Controllers
     [RoutePrefix("api/v1/admin")]
     public class AdminController : BaseController
     {
+        [HttpPost]
+        [Route("CreateLogin")]
+        public IHttpActionResult CreateLogin(string username, string password)
+        {
+            using (var context = new TasteContext())
+            {
+                context.Admins.Add(new Admins()
+                {
+                    Username = username,
+                    Password = password
+                });
+            }
+
+            return Ok("Success");
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        public IHttpActionResult LoginAccount(string username, string password)
+        {
+            using (var context = new TasteContext())
+            {
+                var user = context.Admins.FirstOrDefault(r => r.Username == username);
+                if (password.Equals(user.Password))
+                {
+                    return Ok("Success");
+                } 
+                else
+                {
+                    return Ok("Incorrect password");
+                }
+            }
+        }
+        
         [HttpGet]
         [Route("sync")]
         public async Task<IHttpActionResult> SyncWithClover()

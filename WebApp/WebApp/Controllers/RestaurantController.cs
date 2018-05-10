@@ -37,5 +37,30 @@ namespace WebApp.Controllers
                 return Ok(GetErrorModel(ApiErrorCode.RestaurantDoesNotExist));
             }
         }
+
+        [Route("create")]
+        [HttpPost]
+        public IHttpActionResult AddRestaurant(RestaurantModel restaurant)
+        {
+            using (var context = new TasteContext())
+            {
+                var res = context.Restaurants.ToList();
+                context.Restaurants.Add(new Restaurant()
+                {
+                    Id = restaurant.Id,
+                    CloverId = restaurant.CloverId,
+                    Name = restaurant.Name,
+                    Location = restaurant.Location,
+                    Phone = restaurant.Phone,
+                    Owner = restaurant.Owner,
+                    Image = restaurant.ImageUrl,
+                    AccessToken = restaurant.AccessToken,
+                    ExchangeRate = restaurant.ExchangeRate,
+                    IsSandbox = restaurant.IsSandbox
+                });
+                context.SaveChanges();
+                return Ok("Success");
+            }
+        }
     }
 }

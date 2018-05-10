@@ -219,7 +219,15 @@
           <EntitySet Name="Preferences" EntityType="Self.Preference" />
           <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Admins" EntityType="Taste.Admins" />
         </EntityContainer>
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Password" Type="String" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
