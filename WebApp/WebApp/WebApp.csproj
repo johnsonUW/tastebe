@@ -230,6 +230,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PreferenceController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
+    <Compile Include="Controllers\Signup.cs" />
     <Compile Include="Controllers\SubmitController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UsersController.cs" />

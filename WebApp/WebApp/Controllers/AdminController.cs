@@ -16,26 +16,26 @@ namespace WebApp.Controllers
     {
         [HttpPost]
         [Route("createLogin")]
-        public IHttpActionResult CreateLogin(string username, string password, string name, string location, string phone, string owner, string cloverId, string accessToken)
+        public IHttpActionResult CreateLogin([FromBody]Signup signup)
         {
             using (var context = new TasteContext())
             {
                 context.Admins.Add(new Admins()
                 {
-                    Username = username,
-                    Password = password
+                    Username = signup.username,
+                    Password = signup.password
                 });
 
                 var res = context.Restaurants.ToList();
                 context.Restaurants.Add(new Restaurant()
                 {
-                    CloverId = cloverId,
-                    Name = name,
-                    Location = location,
-                    Phone = phone,
-                    Owner = owner,
+                    CloverId = signup.cloverId,
+                    Name = signup.name,
+                    Location = signup.location,
+                    Phone = signup.phone,
+                    Owner = signup.owner,
                     Image = "",
-                    AccessToken = accessToken,
+                    AccessToken = signup.accessToken,
                     ExchangeRate = 6.5,
                     IsSandbox = false
                 });
@@ -45,7 +45,7 @@ namespace WebApp.Controllers
             return Ok("Success");
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("login")]
         public IHttpActionResult LoginAccount(string username, string password)
         {
