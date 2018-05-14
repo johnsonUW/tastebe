@@ -52,7 +52,7 @@ namespace WebApp.Controllers
                     if (item == null) continue;
                     total += item.Price * od.Quantity;
                 }
-                var totalInPennies = Convert.ToInt32(total * 100 * restaurant.ExchangeRate);
+                var totalInPennies = Convert.ToInt32(total * 100 * restaurant.ExchangeRate * 1.0925) + model.TipInPennies;
                 totalInPennies = 1;
 
                 context.Payments.Add(new Payment
@@ -63,6 +63,8 @@ namespace WebApp.Controllers
                     UserId = model.UserId,
                     OrderId = model.OrderId
                 });
+                order.TipInPennies = model.TipInPennies;
+                order.TotalInPennies = totalInPennies;
                 context.SaveChanges();
 
                 var result = await WechatPayHttpClient.GetPaymentInfo(userAddress, notifyUrl, appId, totalInPennies, WechatTradeType.JSAPI, transactionId, body, merchantId, model.UserId, merchantKey);

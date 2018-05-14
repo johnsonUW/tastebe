@@ -4,5 +4,6 @@
     {
         public string OrderId { get; set; }
         public string UserId { get; set; }
+        public int TipInPennies { get; set; }
     }
 }

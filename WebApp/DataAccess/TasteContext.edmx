@@ -4,121 +4,123 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Taste.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="TasteStoreContainer">
-    <EntitySet Name="Cuisine" EntityType="Taste.Store.Cuisine" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Dishes" EntityType="Taste.Store.Dishes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="OrderedDishes" EntityType="Taste.Store.OrderedDishes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Orders" EntityType="Taste.Store.Orders" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Payments" EntityType="Taste.Store.Payments" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Preferences" EntityType="Taste.Store.Preferences" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Restaurants" EntityType="Taste.Store.Restaurants" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Users" EntityType="Taste.Store.Users" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Admins" EntityType="Taste.Store.Admins" store:Type="Tables" Schema="dbo" />
-  </EntityContainer>
-  <EntityType Name="Cuisine">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Taste" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Dishes">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RestaurantId" Type="int" Nullable="false" />
-    <Property Name="CuisineId" Type="int" Nullable="true" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Flavors" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Ingredients" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Category" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Price" Type="float" Nullable="false" />
-    <Property Name="Image" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Deleted" Type="bit" Nullable="false" />
-    <Property Name="CloverId" Type="nvarchar" Nullable="true" MaxLength="500" />
-  </EntityType>
-  <EntityType Name="OrderedDishes">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="DishId" Type="int" Nullable="false" />
-    <Property Name="Quantity" Type="int" Nullable="false" />
-    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="100" />
-    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="OrderId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CuisineId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Orders">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="OrderId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="100" />
-    <Property Name="Datetime" Type="datetime" Nullable="false" />
-    <Property Name="RestaurantId" Type="int" Nullable="false" />
-    <Property Name="RestaurantName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Paid" Type="bit" Nullable="false" />
-    <Property Name="TableName" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Payments">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Success" Type="bit" Nullable="false" />
-    <Property Name="CreationDate" Type="datetime" Nullable="false" />
-    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="500" />
-    <Property Name="TransactionId" Type="nvarchar" Nullable="false" MaxLength="500" />
-    <Property Name="OrderId" Type="nvarchar" Nullable="false" MaxLength="500" />
-  </EntityType>
-  <EntityType Name="Preferences">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="100" />
-    <Property Name="Ingredients" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="CuisineId" Type="int" Nullable="true" />
-    <Property Name="Dishes" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Flavors" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Count" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Restaurants">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CloverId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
-    <Property Name="Location" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Phone" Type="nvarchar" Nullable="true" MaxLength="20" />
-    <Property Name="Owner" Type="nvarchar" Nullable="true" MaxLength="40" />
-    <Property Name="Image" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="AccessToken" Type="nvarchar" Nullable="true" MaxLength="500" />
-    <Property Name="IsSandbox" Type="bit" Nullable="false" />
-    <Property Name="ExchangeRate" Type="float" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Users">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="100" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Admins">
-    <Key>
-      <PropertyRef Name="Username" />
-    </Key>
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-</Schema></edmx:StorageModels>
+    <Schema Namespace="Taste.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cuisine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Taste" Type="nvarchar(max)" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dishes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="RestaurantId" Type="int" Nullable="false" />
+          <Property Name="CuisineId" Type="int" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Flavors" Type="nvarchar(max)" />
+          <Property Name="Ingredients" Type="nvarchar(max)" />
+          <Property Name="Category" Type="nvarchar(max)" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="CloverId" Type="nvarchar" MaxLength="500" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderedDishes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="OrderId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CuisineId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="OrderId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Datetime" Type="datetime" Nullable="false" />
+          <Property Name="RestaurantId" Type="int" Nullable="false" />
+          <Property Name="RestaurantName" Type="nvarchar(max)" />
+          <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Paid" Type="bit" Nullable="false" />
+          <Property Name="TableName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipInPennies" Type="int" Nullable="false" />
+          <Property Name="TotalInPennies" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Success" Type="bit" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="TransactionId" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="OrderId" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Preference">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ingredients" Type="nvarchar(max)" />
+          <Property Name="CuisineId" Type="int" />
+          <Property Name="Dishes" Type="nvarchar(max)" />
+          <Property Name="Flavors" Type="nvarchar(max)" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CloverId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Location" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="40" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="AccessToken" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsSandbox" Type="bit" Nullable="false" />
+          <Property Name="ExchangeRate" Type="float" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="TasteStoreContainer">
+          <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cuisine" EntityType="Self.Cuisine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dishes" EntityType="Self.Dishes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderedDishes" EntityType="Self.OrderedDishes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Preference" EntityType="Self.Preference" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Taste" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -171,6 +173,8 @@
           <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Paid" Type="Boolean" Nullable="false" />
           <Property Name="TableName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TipInPennies" Type="Int32" Nullable="false" />
+          <Property Name="TotalInPennies" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -182,18 +186,6 @@
           <Property Name="UserId" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TransactionId" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="OrderId" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Preference">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Ingredients" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CuisineId" Type="Int32" />
-          <Property Name="Dishes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Flavors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Count" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Restaurant">
           <Key>
@@ -223,17 +215,29 @@
           <EntitySet Name="OrderedDishes" EntityType="Self.OrderedDish" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Payments" EntityType="Self.Payment" />
-          <EntitySet Name="Preferences" EntityType="Self.Preference" />
           <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Admins" EntityType="Taste.Admins" />
+          <EntitySet Name="Preferences" EntityType="Taste.Preference" />
         </EntityContainer>
         <EntityType Name="Admins">
           <Key>
             <PropertyRef Name="Username" />
           </Key>
-          <Property Name="Password" Type="String" Nullable="false" />
-          <Property Name="Username" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Preference">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ingredients" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CuisineId" Type="Int32" />
+          <Property Name="Dishes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Flavors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -283,7 +287,9 @@
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="IsTypeOf(Taste.Order)">
         <MappingFragment StoreEntitySet="Orders">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TotalInPennies" ColumnName="TotalInPennies" />
+                <ScalarProperty Name="TipInPennies" ColumnName="TipInPennies" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Datetime" ColumnName="Datetime" />
@@ -304,19 +310,6 @@
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Preferences">
-      <EntityTypeMapping TypeName="IsTypeOf(Taste.Preference)">
-        <MappingFragment StoreEntitySet="Preferences">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="Ingredients" ColumnName="Ingredients" />
-          <ScalarProperty Name="CuisineId" ColumnName="CuisineId" />
-          <ScalarProperty Name="Dishes" ColumnName="Dishes" />
-          <ScalarProperty Name="Flavors" ColumnName="Flavors" />
-          <ScalarProperty Name="Count" ColumnName="Count" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -352,6 +345,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <EntitySetMapping Name="Preferences">
+            <EntityTypeMapping TypeName="Taste.Preference">
+              <MappingFragment StoreEntitySet="Preference">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Flavors" ColumnName="Flavors" />
+                <ScalarProperty Name="Dishes" ColumnName="Dishes" />
+                <ScalarProperty Name="CuisineId" ColumnName="CuisineId" />
+                <ScalarProperty Name="Ingredients" ColumnName="Ingredients" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
