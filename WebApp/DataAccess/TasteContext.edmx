@@ -6,7 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="Taste.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="TasteStoreContainer">
-    <EntitySet Name="Cuisines" EntityType="Taste.Store.Cuisines" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cuisine" EntityType="Taste.Store.Cuisine" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Dishes" EntityType="Taste.Store.Dishes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="OrderedDishes" EntityType="Taste.Store.OrderedDishes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Orders" EntityType="Taste.Store.Orders" store:Type="Tables" Schema="dbo" />
@@ -16,7 +16,7 @@
     <EntitySet Name="Users" EntityType="Taste.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Admins" EntityType="Taste.Store.Admins" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
-  <EntityType Name="Cuisines">
+  <EntityType Name="Cuisine">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -218,7 +218,7 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityContainer Name="TasteContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Cuisines" EntityType="Self.Cuisine" />
+          <EntitySet Name="Cuisine" EntityType="Self.Cuisine" />
           <EntitySet Name="Dishes" EntityType="Self.Dish" />
           <EntitySet Name="OrderedDishes" EntityType="Self.OrderedDish" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
@@ -241,9 +241,9 @@
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="TasteStoreContainer" CdmEntityContainer="TasteContext">
-    <EntitySetMapping Name="Cuisines">
+    <EntitySetMapping Name="Cuisine">
       <EntityTypeMapping TypeName="IsTypeOf(Taste.Cuisine)">
-        <MappingFragment StoreEntitySet="Cuisines">
+        <MappingFragment StoreEntitySet="Cuisine">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Taste" ColumnName="Taste" />

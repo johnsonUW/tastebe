@@ -32,7 +32,7 @@ public partial class TasteContext : DbContext
     }
 
 
-    public virtual DbSet<Cuisine> Cuisines { get; set; }
+    public virtual DbSet<Cuisine> Cuisine { get; set; }
 
     public virtual DbSet<Dish> Dishes { get; set; }
 

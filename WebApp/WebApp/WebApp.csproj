@@ -250,6 +250,44 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Management\assets\css\bootstrap-clearmin.min.css" />
+    <Content Include="Management\assets\css\c3.min.css" />
+    <Content Include="Management\assets\css\font-awesome.min.css" />
+    <Content Include="Management\assets\css\roboto.css" />
+    <Content Include="Management\assets\css\small-n-flat.css" />
+    <Content Include="Management\assets\css\summernote.css" />
+    <Content Include="Management\assets\css\tableEditor.css" />
+    <Content Include="Management\assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="Management\assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Management\assets\img\components.png" />
+    <Content Include="Management\assets\img\devices.png" />
+    <Content Include="Management\assets\img\logo-big.svg" />
+    <Content Include="Management\assets\img\logo.svg" />
+    <Content Include="Management\assets\img\sass-less.png" />
+    <Content Include="Management\assets\img\sf\address-book.svg" />
+    <Content Include="Management\assets\img\sf\brick.svg" />
+    <Content Include="Management\assets\img\sf\dashboard.svg" />
+    <Content Include="Management\assets\img\sf\house.svg" />
+    <Content Include="Management\assets\img\sf\money.svg" />
+    <Content Include="Management\assets\js\bootstrap.min.js" />
+    <Content Include="Management\assets\js\clearmin.min.js" />
+    <Content Include="Management\assets\js\demo\dashboard.js" />
+    <Content Include="Management\assets\js\demo\home.js" />
+    <Content Include="Management\assets\js\demo\notepad.js" />
+    <Content Include="Management\assets\js\demo\popovers-tooltips.js" />
+    <Content Include="Management\assets\js\fastclick.min.js" />
+    <Content Include="Management\assets\js\jquery.cookie.min.js" />
+    <Content Include="Management\assets\js\jquery.mousewheel.min.js" />
+    <Content Include="Management\assets\js\lib\c3.min.js" />
+    <Content Include="Management\assets\js\lib\d3.min.js" />
+    <Content Include="Management\assets\js\lib\jquery-2.1.3.min.js" />
+    <Content Include="Management\assets\js\summernote.min.js" />
+    <Content Include="Management\assets\js\tableEditor.js" />
+    <Content Include="Management\dashboard-sales.html" />
+    <Content Include="Management\dashboard-menu.html" />
+    <Content Include="Management\dashboard.html" />
+    <Content Include="Management\index.html" />
+    <Content Include="Management\signup.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -259,6 +297,25 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Management\assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="Management\assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Management\assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="Management\assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Management\assets\fonts\FontAwesome.otf" />
+    <Content Include="Management\assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Management\assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Management\assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Management\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Management\assets\fonts\roboto-italic.woff" />
+    <Content Include="Management\assets\fonts\roboto-italic.woff2" />
+    <Content Include="Management\assets\fonts\roboto-light.woff" />
+    <Content Include="Management\assets\fonts\roboto-light.woff2" />
+    <Content Include="Management\assets\fonts\roboto-medium.woff" />
+    <Content Include="Management\assets\fonts\roboto-medium.woff2" />
+    <Content Include="Management\assets\fonts\roboto-mediumitalic.woff" />
+    <Content Include="Management\assets\fonts\roboto-mediumitalic.woff2" />
+    <Content Include="Management\assets\fonts\roboto-regular.woff" />
+    <Content Include="Management\assets\fonts\roboto-regular.woff2" />
     <None Include="Properties\PublishProfiles\taste - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\tasteservice - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\TasteService - Web Deploy.pubxml" />
