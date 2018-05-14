@@ -61,7 +61,7 @@ namespace WebApp.Controllers
             {
                 CuisineId = o.CuisineId,
                 DishId = o.DishId,
-                Quantity = o.Quantity
+                Quantity = o.Quantity,
             };
         }
 

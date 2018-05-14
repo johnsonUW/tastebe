@@ -35,7 +35,9 @@ namespace WebApp.Controllers
                         DateTime = o.Datetime,
                         OrderId = o.OrderId,
                         Table = o.TableName,
-                        Details = models
+                        Details = models,
+                        TipInPennies = o.TipInPennies,
+                        TotalInPennies = o.TotalInPennies
                     });
                 }
                 return Ok(list);
@@ -62,7 +64,9 @@ namespace WebApp.Controllers
                     DateTime = order.Datetime,
                     OrderId = order.OrderId,
                     Table = order.TableName,
-                    Details = models
+                    Details = models,
+                    TipInPennies = order.TipInPennies,
+                    TotalInPennies = order.TotalInPennies
                 });
             }
         }
