@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,13 +40,14 @@
           
         </div>
       </form>
-      <div class="col-xs-6">
-          <a href="signup.html"><button class="btn btn-block btn-primary">Sign Up</button></a>
+      <br/>
+      <div class="col-xs-12">
+          <a href="signup.html"><button class="btn btn-block btn-block">Sign Up</button></a>
         </div>
     </div>
     <script type="text/javascript">
     	function login(){
-    		var url = "https://tasteservice.chinacloudsites.cn/api/v1/admin/login";
+    		var url = "/api/v1/admin/login";
     		var username = $("#username").val();
     		var password = $("#password").val();
     		var xhttp = new XMLHttpRequest();
@@ -54,9 +56,9 @@
 			    if (this.readyState == 4 && this.status == 200) {
 			       // Typical action to be performed when the document is ready:
 			       sessionStorage.setItem("username", username);
-			        $(window).attr('location','index.html');
+			        $(window).attr('location','dashboard.html');
    				} else{
-   					alert("Username or Password is not correct. Please try again.");
+   					alert("用户名或密码填写错误");
    					return;
    				}
 			};
