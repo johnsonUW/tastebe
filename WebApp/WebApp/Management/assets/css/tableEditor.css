@@ -1,0 +1,55 @@
+﻿/* 
+ * this CSS is not part of the widget, it is here just as an example of the demo page styling.... 
+ * 
+ * Don't copy this one, roll your own. One of the key things about the widget is that 
+ * it allows you to do your own styling!
+ *
+ */
+td:focus {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
+    outline: rgb(91, 157, 217) auto 5px;
+}
+
+input.error {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px red;
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px red;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px red;
+    outline: thin auto red;
+}
+
+input {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
+    outline: rgb(91, 157, 217) auto 5px;
+    outline-offset: 0px;
+    border: none;
+}
+
+#mainTable thead th, #mainTable tbody td {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+}
+
+#mainTable td, #mainTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#mainTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#mainTable tr:hover {
+    background-color: #ddd;
+}
+
+#mainTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #212dbb;
+    color: white;
+}

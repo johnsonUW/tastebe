@@ -51,8 +51,8 @@ GO
 -- Creating all tables
 -- --------------------------------------------------
 
--- Creating table 'Cuisines'
-CREATE TABLE [dbo].[Cuisines] (
+-- Creating table 'Cuisine'
+CREATE TABLE [dbo].[Cuisine] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Taste] nvarchar(max)  NULL
@@ -157,9 +157,9 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [Id] in table 'Cuisines'
-ALTER TABLE [dbo].[Cuisines]
-ADD CONSTRAINT [PK_Cuisines]
+-- Creating primary key on [Id] in table 'Cuisine'
+ALTER TABLE [dbo].[Cuisine]
+ADD CONSTRAINT [PK_Cuisine]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 

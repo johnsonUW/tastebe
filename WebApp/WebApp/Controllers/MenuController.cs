@@ -19,7 +19,7 @@ namespace WebApp.Controllers
             using (var context = new TasteContext())
             {
                 var menu = new List<MenuModel>();
-                var cuisine = context.Cuisines.ToList();
+                var cuisine = context.Cuisine.ToList();
                 foreach (var c in cuisine)
                 {
                     var dishes = context.Dishes.Where(d => d.CuisineId == c.Id && d.RestaurantId == restaurantId && !d.Deleted);

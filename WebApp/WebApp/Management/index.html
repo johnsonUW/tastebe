@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-clearmin.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/roboto.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+    <script src="assets/js/lib/jquery-2.1.3.min.js"></script>
+    <title>Tasty Menu Login</title>
+    <style></style>
+  </head>
+  <body class="cm-login">
+
+    <div class="text-center" style="padding:90px 0 30px 0;background:#fff;border-bottom:1px solid #ddd">
+      <img src="assets/img/logo-big.svg" width="300" height="45">
+    </div>
+    
+    <div class="col-sm-6 col-md-4 col-lg-3" style="margin:40px auto; float:none;">
+      <form>
+	<div class="col-xs-12">
+          <div class="form-group">
+	    <div class="input-group">
+	      <div class="input-group-addon"><i class="fa fa-fw fa-user"></i></div>
+	      <input type="text" id="username"  class="form-control" placeholder="Username">
+	    </div>
+          </div>
+          <div class="form-group">
+	    <div class="input-group">
+	      <div class="input-group-addon"><i class="fa fa-fw fa-lock"></i></div>
+	      <input type="password" id="password"  class="form-control" placeholder="Password">
+	    </div>
+          </div>
+        </div>
+	<div class="col-xs-6">
+          <div class="checkbox"><label><input type="checkbox"> Remember me</label></div>
+	</div><div class="col-xs-6">
+          <button type="submit" onclick="return login()" class="btn btn-block btn-primary">Sign in</button>
+          
+        </div>
+      </form>
+      <br/>
+      <div class="col-xs-12">
+          <a href="signup.html"><button class="btn btn-block btn-block">Sign Up</button></a>
+        </div>
+    </div>
+    <script type="text/javascript">
+    	function login(){
+    		var url = "/api/v1/admin/login";
+    		var username = $("#username").val();
+    		var password = $("#password").val();
+    		var xhttp = new XMLHttpRequest();
+    		xhttp.open("GET", url+"?username="+username+"&password="+password, false);
+			xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+			       // Typical action to be performed when the document is ready:
+			       sessionStorage.setItem("username", username);
+			        $(window).attr('location','dashboard.html');
+   				} else{
+   					alert("用户名或密码填写错误");
+   					return;
+   				}
+			};
+		
+			xhttp.send();
+			return false;
+    	}
+
+    </script>
+  </body>
+</html>

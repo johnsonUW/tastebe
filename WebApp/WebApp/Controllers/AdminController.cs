@@ -52,13 +52,18 @@ namespace WebApp.Controllers
             using (var context = new TasteContext())
             {
                 var user = context.Admins.FirstOrDefault(r => r.Username == username);
+                if (user == null)
+                {
+                    return Unauthorized();
+                }
+
                 if (password.Equals(user.Password))
                 {
                     return Ok("Success");
                 } 
                 else
                 {
-                    return Ok("Incorrect password");
+                    return Unauthorized();
                 }
             }
         }
