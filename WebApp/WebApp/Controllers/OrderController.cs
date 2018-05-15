@@ -37,7 +37,8 @@ namespace WebApp.Controllers
                         Table = o.TableName,
                         Details = models,
                         TipInPennies = o.TipInPennies,
-                        TotalInPennies = o.TotalInPennies
+                        TotalInPennies = o.TotalInPennies,
+                        TaxInPennies = o.TaxInPennies
                     });
                 }
                 return Ok(list);
@@ -66,7 +67,8 @@ namespace WebApp.Controllers
                     Table = order.TableName,
                     Details = models,
                     TipInPennies = order.TipInPennies,
-                    TotalInPennies = order.TotalInPennies
+                    TotalInPennies = order.TotalInPennies,
+                    TaxInPennies = order.TaxInPennies
                 });
             }
         }

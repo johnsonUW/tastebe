@@ -52,8 +52,10 @@ namespace WebApp.Controllers
                     if (item == null) continue;
                     total += item.Price * od.Quantity;
                 }
-                var totalInPennies = Convert.ToInt32(total * 100 * restaurant.ExchangeRate * 1.0925) + model.TipInPennies;
-                totalInPennies = 1;
+
+                var subTotal = Convert.ToInt32(total * 100 * restaurant.ExchangeRate);
+                var taxInPennies = Convert.ToInt32(subTotal * 0.0925);
+                var orderTotal = subTotal + taxInPennies + model.TipInPennies;
 
                 context.Payments.Add(new Payment
                 {
@@ -64,16 +66,17 @@ namespace WebApp.Controllers
                     OrderId = model.OrderId
                 });
                 order.TipInPennies = model.TipInPennies;
-                order.TotalInPennies = totalInPennies;
+                order.TotalInPennies = orderTotal;
+                order.TaxInPennies = taxInPennies;
                 context.SaveChanges();
 
-                var result = await WechatPayHttpClient.GetPaymentInfo(userAddress, notifyUrl, appId, totalInPennies, WechatTradeType.JSAPI, transactionId, body, merchantId, model.UserId, merchantKey);
+                var result = await WechatPayHttpClient.GetPaymentInfo(userAddress, notifyUrl, appId, orderTotal, WechatTradeType.JSAPI, transactionId, body, merchantId, model.UserId, merchantKey);
                 var paymentData = new WechatPaymentModel
                 {
                     Body = body,
                     NotifyUrl = notifyUrl,
                     TransactionId = transactionId,
-                    TotalAmountInPennies = totalInPennies,
+                    TotalAmountInPennies = orderTotal,
                     PrepayId = result.PrepayId,
                     PaySign = WechatMd5SignGenerator.GetPaymentSignMd5Hash(appId, timeStamp, nonce, result.PrepayId, signType, merchantKey),
                     Nonce = nonce,

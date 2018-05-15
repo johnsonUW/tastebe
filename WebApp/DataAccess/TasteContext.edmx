@@ -63,6 +63,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TipInPennies" Type="int" Nullable="false" />
           <Property Name="TotalInPennies" Type="int" Nullable="false" />
+          <Property Name="TaxInPennies" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Payments">
           <Key>
@@ -175,6 +176,7 @@
           <Property Name="TableName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TipInPennies" Type="Int32" Nullable="false" />
           <Property Name="TotalInPennies" Type="Int32" Nullable="false" />
+          <Property Name="TaxInPennies" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -287,7 +289,8 @@
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="IsTypeOf(Taste.Order)">
         <MappingFragment StoreEntitySet="Orders">
-          <ScalarProperty Name="TotalInPennies" ColumnName="TotalInPennies" />
+          <ScalarProperty Name="TaxInPennies" ColumnName="TaxInPennies" />
+                <ScalarProperty Name="TotalInPennies" ColumnName="TotalInPennies" />
                 <ScalarProperty Name="TipInPennies" ColumnName="TipInPennies" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />

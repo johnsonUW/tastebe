@@ -25,5 +25,6 @@ namespace DataAccess
         public string TableName { get; set; }
         public int TipInPennies { get; set; }
         public int TotalInPennies { get; set; }
+        public int TaxInPennies { get; set; }
     }
 }

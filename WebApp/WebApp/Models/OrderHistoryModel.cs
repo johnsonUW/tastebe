@@ -13,6 +13,7 @@ namespace WebApp.Models
         public string Table { get; set; }
         public List<OrderedDishModel> Details { get; set; }
         public int TipInPennies { get; set; }
+        public int TaxInPennies { get; set; }
         public int TotalInPennies { get; set; }
     }
 }
