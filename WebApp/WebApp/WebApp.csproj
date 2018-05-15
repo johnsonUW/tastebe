@@ -316,8 +316,6 @@
     <Content Include="Management\assets\fonts\roboto-mediumitalic.woff2" />
     <Content Include="Management\assets\fonts\roboto-regular.woff" />
     <Content Include="Management\assets\fonts\roboto-regular.woff2" />
-    <None Include="Properties\PublishProfiles\taste - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\tasteservice - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\TasteService - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
