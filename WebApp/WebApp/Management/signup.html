@@ -17,24 +17,24 @@
     <div class="col-sm-6 col-md-4 col-lg-3" style="margin: 100px auto; float: none;">
       <h2>Sign Up </h2>
       <form>
-      <label>Username</label>
+      <label>用户名</label>
       <input type="text" id="username_signup" class="span3">
-      <label>Password</label>
+      <label>密码</label>
       <input type="password" id="password_signup" class="span3">
-      <label>Re-enter Password</label>
+      <label>确认密码</label>
       <input type="password" id="password2_signup" class="span3">
-      <label>Restaurant Name</label>
+      <label>餐厅名称</label>
       <input type="text" id="rest_name_signup" class="span3">
       
-      <label>Restaurant Location</label>
+      <label>餐厅地址</label>
       <input type="text" id="rest_location_signup" class="span3">
-      <label>Restaurant Phone Number</label>
+      <label>餐厅电话</label>
       <input type="text" id="phone_signup" class="span3">
-      <label>Restaurant Owner</label>
+      <label>拥有者</label>
       <input type="text" id="owner_signup" class="span3">
       <label>Clover Id</label>
       <input type="text" id="cloverid_signup" class="span3">
-      <label>Access Token</label>
+      <label>Clover Access Token</label>
       <input type="text" id="token_signup" class="span3">
       <input type="submit" onclick="return signup()" value="Sign up" class="btn btn-primary span3">
       <div class="clearfix"></div>
@@ -46,8 +46,7 @@
             alert("Password doesn't match.");
             return;
         } else{
-
-            var url = "https://tasteservice.chinacloudsites.cn/api/v1/admin/createLogin";
+            var url = "/api/v1/admin/createLogin";
             var body = {
               "username": $("#username_signup").val(),
               "password": $("#password_signup").val(),
@@ -58,22 +57,28 @@
               "cloverId": $("#cloverid_signup").val(),
               "accessToken": $("#token_signup").val()
             };
-            xhttp.onreadystatechange = function() {
-               if (this.readyState == 4 && this.status == 200) {
-                  // Typical action to be performed when the document is ready:
-                  sessionStorage.setItem("username", username);
-                  $(window).attr('location','index.html');
-                } else {
-                  
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'text',
+                data: JSON.stringify(body),
+                async: false,
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data)
+
+                    sessionStorage.setItem("username", $("#username_signup").val());
+                    $(window).attr('location', 'index.html');
+                },
+                fail: function (jqXHR, textStatus, err) {
+                    alert("系统繁忙，请稍后再试");
+                },
+                complete: function (response, textStatus) {
+                    return alert("Hey: " + textStatus);
                 }
-            };
-            xhttp.open("POST", url, true);
-            
-        
-            xhttp.send(body);
-            return false;
+            })
         }
-        
       }
       </script>
   </body>

@@ -288,6 +288,13 @@
     <Content Include="Management\dashboard.html" />
     <Content Include="Management\index.html" />
     <Content Include="Management\signup.html" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery.cookie-1.4.1.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -317,6 +324,8 @@
     <Content Include="Management\assets\fonts\roboto-regular.woff" />
     <Content Include="Management\assets\fonts\roboto-regular.woff2" />
     <None Include="Properties\PublishProfiles\TasteService - Web Deploy.pubxml" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

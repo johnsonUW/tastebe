@@ -18,8 +18,14 @@ namespace WebApp.Controllers
         [Route("createLogin")]
         public IHttpActionResult CreateLogin([FromBody]Signup signup)
         {
+            Console.Write(signup);
             using (var context = new TasteContext())
             {
+                if (context.Admins.Where(a => a.Username.Equals(signup.username)).ToList().Count() > 0)
+                {
+                    return Unauthorized();
+                }
+
                 context.Admins.Add(new Admins()
                 {
                     Username = signup.username,
@@ -42,7 +48,7 @@ namespace WebApp.Controllers
                 context.SaveChanges();
             }
 
-            return Ok("Success");
+            return Json("Success");
         }
 
         [HttpGet]

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/10/2018 00:13:39
+-- Date Created: 05/16/2018 22:20:09
 -- Generated from EDMX file: C:\Users\jason\Documents\repo\tastebe\WebApp\DataAccess\TasteContext.edmx
 -- --------------------------------------------------
 
@@ -37,14 +37,17 @@ GO
 IF OBJECT_ID(N'[dbo].[Payments]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Payments];
 GO
-IF OBJECT_ID(N'[dbo].[Preference]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Preference];
-GO
 IF OBJECT_ID(N'[dbo].[Restaurants]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Restaurants];
 GO
 IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Users];
+GO
+IF OBJECT_ID(N'[dbo].[Admins]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Admins];
+GO
+IF OBJECT_ID(N'[dbo].[Preferences]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Preferences];
 GO
 
 -- --------------------------------------------------
@@ -97,7 +100,10 @@ CREATE TABLE [dbo].[Orders] (
     [RestaurantName] nvarchar(max)  NULL,
     [Details] nvarchar(max)  NOT NULL,
     [Paid] bit  NOT NULL,
-    [TableName] nvarchar(max)  NOT NULL
+    [TableName] nvarchar(max)  NOT NULL,
+    [TipInPennies] int  NOT NULL,
+    [TotalInPennies] int  NOT NULL,
+    [TaxInPennies] int  NOT NULL
 );
 GO
 
@@ -109,18 +115,6 @@ CREATE TABLE [dbo].[Payments] (
     [UserId] nvarchar(500)  NOT NULL,
     [TransactionId] nvarchar(500)  NOT NULL,
     [OrderId] nvarchar(500)  NOT NULL
-);
-GO
-
--- Creating table 'Preferences'
-CREATE TABLE [dbo].[Preferences] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [UserId] nvarchar(100)  NOT NULL,
-    [Ingredients] nvarchar(max)  NULL,
-    [CuisineId] int  NULL,
-    [Dishes] nvarchar(max)  NULL,
-    [Flavors] nvarchar(max)  NULL,
-    [Count] int  NOT NULL
 );
 GO
 
@@ -148,8 +142,21 @@ GO
 
 -- Creating table 'Admins'
 CREATE TABLE [dbo].[Admins] (
-    [Password] nvarchar(max)  NOT NULL,
-    [Username] nvarchar(max)  NOT NULL
+    [Password] nvarchar(100)  NOT NULL,
+    [Username] nvarchar(100)  NOT NULL,
+    [RestaurantName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Preferences'
+CREATE TABLE [dbo].[Preferences] (
+    [UserId] nvarchar(100)  NOT NULL,
+    [Ingredients] nvarchar(max)  NULL,
+    [CuisineId] int  NULL,
+    [Dishes] nvarchar(max)  NULL,
+    [Flavors] nvarchar(max)  NULL,
+    [Count] int  NOT NULL,
+    [Id] int IDENTITY(1,1) NOT NULL
 );
 GO
 
@@ -187,12 +194,6 @@ ADD CONSTRAINT [PK_Payments]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Preferences'
-ALTER TABLE [dbo].[Preferences]
-ADD CONSTRAINT [PK_Preferences]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
 -- Creating primary key on [Id] in table 'Restaurants'
 ALTER TABLE [dbo].[Restaurants]
 ADD CONSTRAINT [PK_Restaurants]
@@ -209,6 +210,12 @@ GO
 ALTER TABLE [dbo].[Admins]
 ADD CONSTRAINT [PK_Admins]
     PRIMARY KEY CLUSTERED ([Username] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Preferences'
+ALTER TABLE [dbo].[Preferences]
+ADD CONSTRAINT [PK_Preferences]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- --------------------------------------------------

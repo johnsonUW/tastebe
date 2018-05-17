@@ -60,7 +60,8 @@
                         <span class="svg-48">
                             <img src="assets/img/sf/address-book.svg" alt="cat">
                         </span>
-                        <h4>菜单</h4>
+                        <h2>菜单</h2>
+                        <h4>单击列表中的文字进行修改，完成后点击保存修改</h4>
                     </div>
                     <div class="panel-heading"></div>
                     <div class="panel-body" id="demo-buttons">
@@ -100,7 +101,7 @@
                     .done(function (data) {
                         $.each(data, function (key, item) {
                             var html = '<table id="mainTable">';
-                            html += '<tr><th>分类</th><th>菜名</th></tr>';
+                            html += '<tr><th>分类</th><th>菜名</th><th>菜系</th><th>描述</th><th>口味</th><th>原料</th><th>价格</th><th>图片</th></tr>';
                             item.items.forEach(function (dish) {
                                 html += '<tr>';
                                 html += '<td>' + dish.name + '</td>';
@@ -109,6 +110,8 @@
                                 html += '<td>' + dish.description + '</td>';
                                 html += '<td>' + dish.flavors + '</td>';
                                 html += '<td>' + dish.ingredients + '</td>';
+                                html += '<td>' + dish.price + '</td>';
+                                html += '<td>' + dish.image + '</td>';
                                 html += '</tr>';
                             });
                             html += '</table>';

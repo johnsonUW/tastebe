@@ -37,5 +37,19 @@ namespace WebApp.Controllers
                 return Ok(GetErrorModel(ApiErrorCode.RestaurantDoesNotExist));
             }
         }
+
+        [Route("user/{username}")]
+        [HttpGet]
+        public IHttpActionResult GetRestaurantByUserId(string username)
+        {
+            using (var context = new TasteContext())
+            {
+                var admin = context.Admins.FirstOrDefault(a => a.Username == username);
+                var res = context.Restaurants.FirstOrDefault(r => r.Name.Equals(admin.RestaurantName));
+
+                if (res != null) return Ok(ToModel(res));
+                return Ok(GetErrorModel(ApiErrorCode.RestaurantDoesNotExist));
+            }
+        }
     }
 }

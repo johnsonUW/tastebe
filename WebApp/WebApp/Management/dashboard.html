@@ -1,4 +1,4 @@
-<<<<<<< HEAD:Management Site/index.html
+﻿<<<<<<< HEAD:Management Site/index.html
 
 <!DOCTYPE html>
 =======
@@ -72,21 +72,36 @@
                         <span class="svg-48">
                             <img src="assets/img/sf/house.svg" alt="cat">
                         </span>
-                        <h4>渝天下</h4>
+                        <h4 id="name"></h4>
                     </div>
                     <div class="panel-heading"></div>
                     <div class="panel-body" id="demo-buttons">
                         <div class="row">
-                            <p>餐厅地址:</p>
-                            <p>老板:</p>
-                            <p>地址:</p>
-                            <p>联系电话:</p>
+                            <p id="address">餐厅地址:</p>
+                            <p id="owner">老板:</p>
+                            <p id="phone">联系电话:</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <footer class="cm-footer"><span class="pull-left">Connected as John Smith</span><span class="pull-right">&copy; PAOMEDIA SARL</span></footer>
         </div>
         
+        <script>
+            var uri = '/api/v1/restaurants/user/stone1994';
+
+                    $(document).ready(function () {
+                        $.getJSON(uri)
+                            .done(function (data) {
+                                console.log(data);
+                                $('#name').append(data.name);
+                                $('#address').append(data.location);
+                                $('#owner').append(data.owner);
+                                $('#phone').append(data.phone);
+                            })
+                            .fail(function (jqXHR, textStatus, err) {
+                                alert("系统繁忙，请稍后再试");
+                            });
+                    });
+        </script>
     </body>
 </html>
