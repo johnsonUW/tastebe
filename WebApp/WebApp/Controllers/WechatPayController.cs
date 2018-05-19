@@ -53,9 +53,6 @@ namespace WebApp.Controllers
                     total += item.Price * od.Quantity;
                 }
 
-                var subTotal = Convert.ToInt32(total * 100 * restaurant.ExchangeRate);
-                var taxInPennies = Convert.ToInt32(subTotal * 0.0925);
-                var orderTotal = subTotal + taxInPennies + model.TipInPennies;
 
                 context.Payments.Add(new Payment
                 {
@@ -66,17 +63,22 @@ namespace WebApp.Controllers
                     OrderId = model.OrderId
                 });
                 order.TipInPennies = model.TipInPennies;
-                order.TotalInPennies = orderTotal;
-                order.TaxInPennies = taxInPennies;
+                order.TotalInPennies = Convert.ToInt32(total * 100);
+                order.TaxInPennies = Convert.ToInt32(order.TotalInPennies * 0.0925);
                 context.SaveChanges();
 
-                var result = await WechatPayHttpClient.GetPaymentInfo(userAddress, notifyUrl, appId, orderTotal, WechatTradeType.JSAPI, transactionId, body, merchantId, model.UserId, merchantKey);
+                var subTotalRmb = Convert.ToInt32(order.TotalInPennies * restaurant.ExchangeRate);
+                var tipRmb = Convert.ToInt32(model.TipInPennies * restaurant.ExchangeRate);
+                var taxInPenniesRmb = Convert.ToInt32(order.TaxInPennies * restaurant.ExchangeRate);
+                var orderTotalRmb = subTotalRmb + tipRmb + taxInPenniesRmb;
+
+                var result = await WechatPayHttpClient.GetPaymentInfo(userAddress, notifyUrl, appId, orderTotalRmb, WechatTradeType.JSAPI, transactionId, body, merchantId, model.UserId, merchantKey);
                 var paymentData = new WechatPaymentModel
                 {
                     Body = body,
                     NotifyUrl = notifyUrl,
                     TransactionId = transactionId,
-                    TotalAmountInPennies = orderTotal,
+                    TotalAmountInPennies = orderTotalRmb,
                     PrepayId = result.PrepayId,
                     PaySign = WechatMd5SignGenerator.GetPaymentSignMd5Hash(appId, timeStamp, nonce, result.PrepayId, signType, merchantKey),
                     Nonce = nonce,
