@@ -36,7 +36,7 @@ namespace WebApp.Controllers
                         OrderId = o.OrderId,
                         Table = o.TableName,
                         Details = models,
-                        TipInPennies = o.TipInPennies,
+                        TipInPennies = o.Paid ? o.TipInPennies : 0,
                         TotalInPennies = o.TotalInPennies,
                         TaxInPennies = o.TaxInPennies
                     });
@@ -66,7 +66,7 @@ namespace WebApp.Controllers
                     OrderId = order.OrderId,
                     Table = order.TableName,
                     Details = models,
-                    TipInPennies = order.TipInPennies,
+                    TipInPennies = order.Paid ? order.TipInPennies : 0,
                     TotalInPennies = order.TotalInPennies,
                     TaxInPennies = order.TaxInPennies
                 });

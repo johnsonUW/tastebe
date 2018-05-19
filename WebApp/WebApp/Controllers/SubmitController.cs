@@ -108,7 +108,19 @@ namespace WebApp.Controllers
                 var order = context.Orders.FirstOrDefault(o => o.OrderId == model.OrderId);
                 if (order != null)
                 {
+                    double total = 0;
+                    var orderItems = context.OrderedDishes.Where(o => o.OrderId == model.OrderId && o.UserId == model.UserId);
+                    foreach (var od in orderItems)
+                    {
+                        var item = context.Dishes.FirstOrDefault(it => it.Id == od.DishId);
+                        if (item == null) continue;
+                        total += item.Price * od.Quantity;
+                    }
+
                     order.Paid = true;
+                    order.TotalInPennies = Convert.ToInt32(total * 100);
+                    order.TaxInPennies = Convert.ToInt32(order.TotalInPennies * 0.0925);
+                    order.TipInPennies = 0;
                     context.SaveChanges();
                 }
                 return Ok();
