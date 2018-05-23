@@ -287,8 +287,10 @@
     <Content Include="Management\dashboard-menu.html" />
     <Content Include="Management\dashboard.html" />
     <Content Include="Management\index.html" />
+    <Content Include="Management\policy.html" />
     <Content Include="Management\signup.html" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Management\terms.html" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
