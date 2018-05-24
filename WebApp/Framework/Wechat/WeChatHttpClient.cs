@@ -34,7 +34,7 @@ namespace Framework.Wechat
             var client = GetClient();
             var data = new WechatQrCodeRequestModel
             {
-                Path = $"pages/index/index?id={id}"
+                Path = $"pages/homepage/index?id={id}"
             };
             var content = JsonConvert.SerializeObject(data);
             var result = await client.PostAsync($"cgi-bin/wxaapp/createwxaqrcode?access_token={token}", new StringContent(content));
