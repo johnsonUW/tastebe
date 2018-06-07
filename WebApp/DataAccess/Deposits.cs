@@ -15,20 +15,14 @@ namespace DataAccess
 using System;
     using System.Collections.Generic;
     
-public partial class Payment
+public partial class Deposits
 {
 
     public int Id { get; set; }
 
-    public bool Success { get; set; }
+    public int RestaurantId { get; set; }
 
-    public System.DateTime CreationDate { get; set; }
-
-    public string UserId { get; set; }
-
-    public string TransactionId { get; set; }
-
-    public string OrderId { get; set; }
+    public int AmountInPennies { get; set; }
 
 }
 

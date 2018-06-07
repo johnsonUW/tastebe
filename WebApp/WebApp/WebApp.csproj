@@ -226,7 +226,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DepositController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\DishController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PreferenceController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />

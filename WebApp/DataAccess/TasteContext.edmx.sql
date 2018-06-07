@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/16/2018 22:20:09
--- Generated from EDMX file: C:\Users\jason\Documents\repo\tastebe\WebApp\DataAccess\TasteContext.edmx
+-- Date Created: 06/07/2018 13:36:10
+-- Generated from EDMX file: E:\repo\tastebe\WebApp\DataAccess\TasteContext.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -22,6 +22,9 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Admins]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Admins];
+GO
 IF OBJECT_ID(N'[dbo].[Cuisine]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Cuisine];
 GO
@@ -37,17 +40,14 @@ GO
 IF OBJECT_ID(N'[dbo].[Payments]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Payments];
 GO
+IF OBJECT_ID(N'[dbo].[Preference]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Preference];
+GO
 IF OBJECT_ID(N'[dbo].[Restaurants]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Restaurants];
 GO
 IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Users];
-GO
-IF OBJECT_ID(N'[dbo].[Admins]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Admins];
-GO
-IF OBJECT_ID(N'[dbo].[Preferences]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Preferences];
 GO
 
 -- --------------------------------------------------
@@ -144,7 +144,7 @@ GO
 CREATE TABLE [dbo].[Admins] (
     [Password] nvarchar(100)  NOT NULL,
     [Username] nvarchar(100)  NOT NULL,
-    [RestaurantName] nvarchar(max)  NOT NULL
+    [RestaurantName] nvarchar(max)  NULL
 );
 GO
 
@@ -157,6 +157,14 @@ CREATE TABLE [dbo].[Preferences] (
     [Flavors] nvarchar(max)  NULL,
     [Count] int  NOT NULL,
     [Id] int IDENTITY(1,1) NOT NULL
+);
+GO
+
+-- Creating table 'Deposits'
+CREATE TABLE [dbo].[Deposits] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [RestaurantId] int  NOT NULL,
+    [AmountInPennies] int  NOT NULL
 );
 GO
 
@@ -215,6 +223,12 @@ GO
 -- Creating primary key on [Id] in table 'Preferences'
 ALTER TABLE [dbo].[Preferences]
 ADD CONSTRAINT [PK_Preferences]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Deposits'
+ALTER TABLE [dbo].[Deposits]
+ADD CONSTRAINT [PK_Deposits]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 

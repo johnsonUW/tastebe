@@ -57,6 +57,9 @@
     <Compile Include="Cuisine.cs">
       <DependentUpon>TasteContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Deposits.cs">
+      <DependentUpon>TasteContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Dish.cs">
       <DependentUpon>TasteContext.tt</DependentUpon>
     </Compile>
