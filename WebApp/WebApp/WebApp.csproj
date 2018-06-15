@@ -226,7 +226,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DepositController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\DishController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PreferenceController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
@@ -289,8 +291,10 @@
     <Content Include="Management\dashboard-menu.html" />
     <Content Include="Management\dashboard.html" />
     <Content Include="Management\index.html" />
+    <Content Include="Management\policy.html" />
     <Content Include="Management\signup.html" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Management\terms.html" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />

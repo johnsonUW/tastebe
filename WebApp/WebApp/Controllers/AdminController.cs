@@ -85,7 +85,7 @@ namespace WebApp.Controllers
                 {
                     var restaurantId = restaurant.Id;
                     var result = await CloverClient.GetItemsAsync(restaurant.AccessToken, restaurant.CloverId, restaurant.IsSandbox);
-
+                    
                     var existingMenu = context.Dishes.Where(d => !d.Deleted && d.RestaurantId == restaurantId).ToList();
                     var ids = existingMenu.Select(d => d.CloverId).ToList();
                     ids.RemoveAll(s => s == null);
