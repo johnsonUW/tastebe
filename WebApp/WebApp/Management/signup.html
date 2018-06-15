@@ -16,7 +16,7 @@
 
     <div class="col-sm-6 col-md-4 col-lg-3" style="margin: 100px auto; float: none;">
       <h2>Sign Up </h2>
-      <form>
+      <form id="signup_form" action="dashboard.html">
       <label>用户名</label>
       <input type="text" id="username_signup" class="span3">
       <label>密码</label>
@@ -36,7 +36,7 @@
       <input type="text" id="cloverid_signup" class="span3">
       <label>Clover Access Token</label>
       <input type="text" id="token_signup" class="span3">
-      <input type="submit" onclick="return signup()" value="Sign up" class="btn btn-primary span3">
+      <input type="submit" onclick="return signup()" value="Sign up" class="btn btn-primary span3 submit">
       <div class="clearfix"></div>
       </form>
     </div>
@@ -44,7 +44,6 @@
       function signup(){
         if($("#password_signup").val() != $("#password2_signup").val()) {
             alert("Password doesn't match.");
-            return;
         } else{
             var url = "/api/v1/admin/createLogin";
             var body = {
@@ -66,16 +65,21 @@
                 async: false,
                 contentType: 'application/json',
                 success: function (data) {
-                    console.log(data)
-
+                    console.log(data);
                     sessionStorage.setItem("username", $("#username_signup").val());
-                    $(window).attr('location', 'index.html');
+                    $(window).attr('location', 'dashboard.html');
                 },
                 fail: function (jqXHR, textStatus, err) {
                     alert("系统繁忙，请稍后再试");
                 },
-                complete: function (response, textStatus) {
-                    return alert("Hey: " + textStatus);
+                complete: function (response, text) {
+                    if (text == "error") {
+                        var $form = $('form');
+                        $form.submit(function (e) {
+                            e.preventDefault();
+                            return false;
+                        });
+                    }
                 }
             })
         }

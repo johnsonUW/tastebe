@@ -255,6 +255,7 @@
     <Content Include="Management\assets\css\font-awesome.min.css" />
     <Content Include="Management\assets\css\roboto.css" />
     <Content Include="Management\assets\css\small-n-flat.css" />
+    <Content Include="Management\assets\css\material-design.css" />
     <Content Include="Management\assets\css\summernote.css" />
     <Content Include="Management\assets\css\tableEditor.css" />
     <Content Include="Management\assets\fonts\fontawesome-webfont.svg" />
@@ -271,6 +272,7 @@
     <Content Include="Management\assets\img\sf\money.svg" />
     <Content Include="Management\assets\js\bootstrap.min.js" />
     <Content Include="Management\assets\js\clearmin.min.js" />
+    <Content Include="Management\assets\js\dashboard-script.js" />
     <Content Include="Management\assets\js\demo\dashboard.js" />
     <Content Include="Management\assets\js\demo\home.js" />
     <Content Include="Management\assets\js\demo\notepad.js" />

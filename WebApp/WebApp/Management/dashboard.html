@@ -1,9 +1,4 @@
-﻿<<<<<<< HEAD:Management Site/index.html
-
-<!DOCTYPE html>
-=======
 ﻿<!DOCTYPE html>
->>>>>>> 09bafb22fe2775b6cf2e58a693e221f9acb984c7:WebApp/WebApp/Management/dashboard.html
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -20,8 +15,8 @@
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/clearmin.min.js"></script>
         <script src="assets/js/demo/home.js"></script>
-        <script src="assets/js/index.js"></script>
-        <title>豪吃</title>
+        <script src="assets/js/dashboard-script.js"></script>
+        <title>TastyMenu</title>
     </head>
     <body class="cm-no-transition cm-1-navbar">
         <div id="cm-menu">
@@ -46,15 +41,11 @@
             <nav class="cm-navbar cm-navbar-primary">
                 <div class="btn btn-primary md-menu-white hidden-md hidden-lg" data-toggle="cm-menu"></div>
                 <div class="cm-flex">
-                    <h1 class="test session">主页</h1> 
+                    <h1 class="display_username"></h1> 
                 </div>
                 <div class="dropdown pull-right">
                     <button class="btn btn-primary md-account-circle-white" data-toggle="dropdown"></button>
                     <ul class="dropdown-menu">
-                        <li class="disabled text-center">
-                            <a style="cursor:default;"><strong>John Smith</strong></a>
-                        </li>
-                        <li>
                             <a href="index.html"><i class="fa fa-fw fa-sign-out"></i>登出</a>
                         </li>
                     </ul>
@@ -63,7 +54,7 @@
         </header>
         <div id="global">
             <div class="container-fluid cm-container-white">
-                <h2 style="margin-top:0;">豪吃 - 餐饮管理系统</h2> 
+                <h2 style="margin-top:0;">TastyMenu - 餐饮管理系统</h2> 
                 <p>管理您的餐厅信息</p>
             </div>
             <div class="container-fluid">
@@ -86,22 +77,5 @@
             </div>
         </div>
         
-        <script>
-            var uri = '/api/v1/restaurants/user/stone1994';
-
-                    $(document).ready(function () {
-                        $.getJSON(uri)
-                            .done(function (data) {
-                                console.log(data);
-                                $('#name').append(data.name);
-                                $('#address').append(data.location);
-                                $('#owner').append(data.owner);
-                                $('#phone').append(data.phone);
-                            })
-                            .fail(function (jqXHR, textStatus, err) {
-                                alert("系统繁忙，请稍后再试");
-                            });
-                    });
-        </script>
     </body>
 </html>
