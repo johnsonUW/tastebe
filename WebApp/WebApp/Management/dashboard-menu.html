@@ -58,7 +58,7 @@
                             <img src="assets/img/sf/address-book.svg" alt="cat">
                         </span>
                         <h2>菜单</h2>
-                        <h4>单击列表中的文字进行修改，完成后点击保存修改</h4>
+                        <h4>单击列表中的文字进行修改，完成后点击保存修改。如需要上传图片，请在修改菜单前先上传图片！</h4>
                     </div>
                     <div class="panel-heading"></div>
                     <div class="panel-body" id="demo-buttons">
@@ -93,7 +93,14 @@
             var uri = '/api/v1/menu';
 
             $(document).ready(function () {
-                var id = 1;
+                $(".fa-sign-out").click(function () {
+                    sessionStorage.clear();
+                    $(window).attr('location', 'index.html');
+                    return;
+                });
+
+                var id = sessionStorage.getItem("userId");
+                var imgUrl = "";
                 $.getJSON(uri + '/' + id)
                     .done(function (data) {
                         $.each(data, function (key, item) {
@@ -108,8 +115,9 @@
                                 html += '<td class = "flavors">' + dish.flavors + '</td>';
                                 html += '<td class = "ingredients">' + dish.ingredients + '</td>';
                                 html += '<td class = "price">' + dish.price + '</td>';
-                                html += '<td class = "image">' + dish.image + '</td>';
+                                html += '<td class = "image"> <input type="file" value="点击上传图片"><button type="button" id="upload" onclick = "uploadImg();">开始上传</button><div id = "imgPath"></div></td>';
                                 html += '</tr>';
+                                imgUrl = data.imageUrl;
                             });
                             html += '</table>';
                             $('#product').html(html);
@@ -124,7 +132,34 @@
                     });
             });
 
+            function uploadImg() {
+                
+                    var file = $('input[type="file"]').prop('files')[0]
+
+                    var formData = new FormData();
+                    formData.append('image', file);
+                
+                    $.ajax({
+                        url: '/api/v1/upload',
+                        type: 'post',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (e) {
+                            $('#imgPath').append('<p>图片地址: ' + e.url + '</p>')
+                        }
+                    })
+            }
+
             function edit() {
+                var name = $('.name').html();
+                var category = $('.category').html();
+                var cuisine = $('.cuisine').html();
+                var description = $('.description').html();
+                var flavors = $('.flavors').html();
+                var ingredients = $('.ingredients').html();
+                var price = $('.price').html();
+                var img = imgUrl;
 
             }
         </script>
