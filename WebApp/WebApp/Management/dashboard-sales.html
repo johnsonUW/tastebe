@@ -81,15 +81,22 @@
         <script src="assets/js/clearmin.min.js"></script>
         <script src="assets/js/demo/home.js"></script>
         <script>
-            var uri = '/api/v1/menu';
+            var uri = '/api/v1/deposit';
 
             $(document).ready(function () {
-                var id = 1;
+
+                $(".fa-sign-out").click(function () {
+                    sessionStorage.clear();
+                    $(window).attr('location', 'index.html');
+                    return;
+                });
+
+                var id = sessionStorage.getItem("userId");
                 $.getJSON(uri + '/' + id)
                     .done(function (data) {
                         $.each(data, function (key, item) {
                             
-                            $('#income').html(html);
+                            $('#income').html();
                         });
                     })
                     .fail(function (jqXHR, textStatus, err) {

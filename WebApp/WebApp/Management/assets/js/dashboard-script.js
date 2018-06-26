@@ -23,6 +23,7 @@
             $('#address').append(data.location);
             $('#owner').append(data.owner);
             $('#phone').append(data.phone);
+            sessionStorage.setItem("userId", data.id);
         })
         .fail(function (jqXHR, textStatus, err) {
             alert("系统繁忙，请稍后再试");
