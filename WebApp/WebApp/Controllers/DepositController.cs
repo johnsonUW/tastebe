@@ -30,6 +30,23 @@ namespace WebApp.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("tips/{restaurantId}")]
+        public IHttpActionResult GetTipsForRestaurant(int restaurantId)
+        {
+            using (var context = new TasteContext())
+            {
+                var orders = context.Orders.Where(o => o.RestaurantId == restaurantId).ToList();
+                var sumTotal = 0;
+                foreach (var o in orders)
+                {
+                    var orderTotal = o.TipInPennies;
+                    sumTotal += orderTotal;
+                }
+                return Ok(sumTotal);
+            }
+        }
+
         [HttpPost]
         [Route("submit")]
         public IHttpActionResult AddDeposit([FromBody]Deposits deposits)
