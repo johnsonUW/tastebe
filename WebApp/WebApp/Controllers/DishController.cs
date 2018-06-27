@@ -15,13 +15,13 @@ namespace WebApp.Controllers
     {
         [HttpPost]
         [Route("editDish")]
-        public IHttpActionResult EditDishInformation([FromBody]Dish dish)
+        public IHttpActionResult EditDishInformation([FromBody] Dish dish)
         {
             using (var context = new TasteContext())
             {
                 var retrievedDish = context.Dishes.FirstOrDefault(d => d.Id == dish.Id);
                 if (retrievedDish == null) return Ok();
-               //retrievedDish.RestaurantId = dish.RestaurantId;
+                //retrievedDish.RestaurantId = dish.RestaurantId;
                 retrievedDish.CuisineId = dish.CuisineId;
                 //retrievedDish.Name = dish.Name;
                 retrievedDish.Description = dish.Description;
@@ -30,12 +30,24 @@ namespace WebApp.Controllers
                 retrievedDish.Category = dish.Category;
                 //retrievedDish.Price = dish.Price;
                 retrievedDish.Image = dish.Image;
-                retrievedDish.Deleted = dish.Deleted;
-                retrievedDish.CloverId = dish.CloverId;
+                //retrievedDish.Deleted = dish.Deleted;
+                //retrievedDish.CloverId = dish.CloverId;
+                
                 context.SaveChanges();
 
                 return Ok("Save success");
             }
         }
+
+        [HttpGet]
+        [Route("cuisinecategory")]
+        public IHttpActionResult GetAllCategory()
+        {
+            using (var context = new TasteContext())
+            {
+                return Ok(context.Cuisine.ToList());
+            }
+        }
+
     }
 }
