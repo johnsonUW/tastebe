@@ -1,168 +1,261 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-        <link href="assets/css/tableEditor.css" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-clearmin.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/roboto.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/material-design.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/small-n-flat.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
 
-        <title>TastyMenu</title>
-    </head>
-    <body class="cm-no-transition cm-1-navbar">
-        <div id="cm-menu">
-            <nav class="cm-navbar cm-navbar-primary">
-                <div class="cm-flex"><a href="dashboard.html" class="cm-logo"></a></div>
-                <div class="btn btn-primary md-menu-white" data-toggle="cm-menu"></div>
-            </nav>
-            <div id="cm-menu-content">
-                <div id="cm-menu-items-wrapper">
-                    <div id="cm-menu-scroller">
-                        <ul class="cm-menu-items">
-                            <li class="active"><a href="dashboard.html" class="sf-house">主页</a></li>
-                            <li><a href="dashboard-sales.html" class="sf-dashboard">收入管理</a></li>
-                            <li><a href="dashboard-menu.html" class="sf-brick">菜单管理</a></li>
-                        </ul>
-                    </div>
-                </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link href="assets/css/tableEditor.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-clearmin.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/roboto.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/material-design.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/small-n-flat.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+
+    <title>TastyMenu</title>
+</head>
+
+<body class="cm-no-transition cm-1-navbar">
+    <div id="cm-menu">
+        <nav class="cm-navbar cm-navbar-primary">
+            <div class="cm-flex">
+                <a href="dashboard.html" class="cm-logo"></a>
             </div>
-        </div>
-        <header id="cm-header">
-            <nav class="cm-navbar cm-navbar-primary">
-                <div class="btn btn-primary md-menu-white hidden-md hidden-lg" data-toggle="cm-menu"></div>
-                <div class="cm-flex">
-                    <h1>菜单管理</h1> 
-                </div>
-                <div class="dropdown pull-right">
-                    <button class="btn btn-primary md-account-circle-white" data-toggle="dropdown"></button>
-                    <ul class="dropdown-menu">
+            <div class="btn btn-primary md-menu-white" data-toggle="cm-menu"></div>
+        </nav>
+        <div id="cm-menu-content">
+            <div id="cm-menu-items-wrapper">
+                <div id="cm-menu-scroller">
+                    <ul class="cm-menu-items">
+                        <li class="active">
+                            <a href="dashboard.html" class="sf-house">主页</a>
+                        </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-fw fa-sign-out"></i>登出</a>
+                            <a href="dashboard-sales.html" class="sf-dashboard">收入管理</a>
+                        </li>
+                        <li>
+                            <a href="dashboard-menu.html" class="sf-brick">菜单管理</a>
                         </li>
                     </ul>
                 </div>
-            </nav>
-        </header>
-        <div id="global">
-            <div class="container-fluid cm-container-white">
-                <h2 style="margin-top:0;">菜单管理</h2> 
-                <p>如需添加菜品可在Clover添加，菜单系统会定期与Clover同步</p>
             </div>
-            <div class="container-fluid">
-                <div class="panel panel-default">
-                    <div class="panel-body text-center">
-                        <span class="svg-48">
-                            <img src="assets/img/sf/address-book.svg" alt="cat">
-                        </span>
-                        <h2>菜单</h2>
-                        <h4>单击列表中的文字进行修改，完成后点击保存修改。如需要上传图片，请在修改菜单前先上传图片！</h4>
-                    </div>
-                    <div class="panel-heading"></div>
-                    <div class="panel-body" id="demo-buttons">
-                        <!--<div>
+        </div>
+    </div>
+    <header id="cm-header">
+        <nav class="cm-navbar cm-navbar-primary">
+            <div class="btn btn-primary md-menu-white hidden-md hidden-lg" data-toggle="cm-menu"></div>
+            <div class="cm-flex">
+                <h1>菜单管理</h1>
+            </div>
+            <div class="dropdown pull-right">
+                <button class="btn btn-primary md-account-circle-white" data-toggle="dropdown"></button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="index.html">
+                            <i class="fa fa-fw fa-sign-out"></i>登出</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div id="global">
+        <div class="container-fluid cm-container-white">
+            <h2 style="margin-top:0;">菜单管理</h2>
+            <p>如需添加菜品可在Clover添加，菜单系统会定期与Clover同步</p>
+        </div>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body text-center">
+                    <span class="svg-48">
+                        <img src="assets/img/sf/address-book.svg" alt="cat">
+                    </span>
+                    <h2>菜单</h2>
+                    <h4>单击列表中的文字进行修改，完成后点击保存修改。如需要上传图片，请在修改菜单前先上传图片！</h4>
+                </div>
+                <div class="panel-heading"></div>
+                <div class="panel-body" id="demo-buttons">
+                    <!--<div>
                             <h2>输入餐厅Id获取菜单</h2>
                             <ul id="products" />
                         </div>-->
-                        <div>
-                            <!--<input type="text" id="prodId" size="5" />-->
+                    <div>
+                        <!--<input type="text" id="prodId" size="5" />-->
 
-                            <input style="background-color:#129999; color: white;padding:10px" type="button" value="保存修改" onclick="edit();" />
-                            <br/>
-                            <br />
-                            <br />
-                            <p id="product" />
-                        </div>
+                        <input style="background-color:#129999; color: white;padding:10px" type="button" value="保存修改" onclick="edit();" />
+                        <br/>
+                        <br />
+                        <br />
+                        <p id="product" />
                     </div>
                 </div>
             </div>
-            <footer class="cm-footer"><span class="pull-left"></span><span class="pull-right">&copy; TastyMenu</span></footer>
         </div>
-        <script src="assets/js/lib/jquery-2.1.3.min.js"></script>
-        <script src="assets/js/jquery.mousewheel.min.js"></script>
-        <script src="assets/js/jquery.cookie.min.js"></script>
-        <script src="assets/js/fastclick.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/clearmin.min.js"></script>
-        <script src="assets/js/demo/home.js"></script>
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
-        <script src="assets/js/tableEditor.js"></script>
-        <script>
-            var uri = '/api/v1/menu';
-            var imgUrl = [];
-            $(document).ready(function () {
-                $(".fa-sign-out").click(function () {
-                    sessionStorage.clear();
-                    $(window).attr('location', 'index.html');
-                    return;
-                });
-
-                var id = sessionStorage.getItem("userId");
-                
-                $.getJSON(uri + '/' + id)
-                    .done(function (data) {
-                        $.each(data, function (key, item) {
-                            var html = '<table id="mainTable">';
-                            html += '<tr><th>分类</th><th>菜名</th><th>菜系</th><th>描述</th><th>口味</th><th>原料</th><th>价格</th><th>图片</th></tr>';
-                            item.items.forEach(function (dish) {
-                                html += '<tr>';
-                                html += '<td class ="name">' + dish.name + '</td>';
-                                html += '<td class = "category">' + dish.category + '</td>';
-                                html += '<td class = "cuisine">' + dish.cuisine + '</td>';
-                                html += '<td class = "description">' + dish.description + '</td>';
-                                html += '<td class = "flavors">' + dish.flavors + '</td>';
-                                html += '<td class = "ingredients">' + dish.ingredients + '</td>';
-                                html += '<td class = "price">' + dish.price + '</td>';
-                                html += '<td class = "image"> <input type="file" value="点击上传图片"><button type="button" id="upload" onclick = "uploadImg();">开始上传</button><div id = "imgPath"></div></td>';
-                                html += '</tr>';
-                                imgUrl.push(data.imageUrl);
-                            });
-                            html += '</table>';
-                            $('#product').html(html);
-                        });
-
-                        $('#mainTable').editableTableWidget({
-                            cloneProperties: ['background', 'border', 'outline']
-                        });
-                    })
-                    .fail(function (jqXHR, textStatus, err) {
-                        alert("系统繁忙，请稍后再试");
-                    });
+        <footer class="cm-footer">
+            <span class="pull-left"></span>
+            <span class="pull-right">&copy; TastyMenu</span>
+        </footer>
+    </div>
+    <script src="assets/js/lib/jquery-2.1.3.min.js"></script>
+    <script src="assets/js/jquery.mousewheel.min.js"></script>
+    <script src="assets/js/jquery.cookie.min.js"></script>
+    <script src="assets/js/fastclick.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/clearmin.min.js"></script>
+    <script src="assets/js/demo/home.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/tableEditor.js"></script>
+    <script>
+        var uri = '/api/v1/menu';
+        var edit_dish_uri = '/api/v1/dish/editDish'
+        var imgUrl = [];
+        var _dishData = [];
+        $(document).ready(function () {
+            $(".fa-sign-out").click(function () {
+                sessionStorage.clear();
+                $(window).attr('location', 'index.html');
+                return;
             });
 
-            function uploadImg() {
-                
-                    var file = $('input[type="file"]').prop('files')[0]
+            var id = sessionStorage.getItem("userId");
 
-                    var formData = new FormData();
-                    formData.append('image', file);
-                
-                    $.ajax({
-                        url: '/api/v1/upload',
-                        type: 'post',
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        success: function (e) {
-                            $('#imgPath').append('<p>图片地址: ' + e.url + '</p>')
-                        }
-                    })
+            $.getJSON(uri + '/' + id)
+                .done(function (data) {
+                    
+                    $.each(data, function (key, item) {
+                        var html = '<table id="mainTable">';
+                        html += '<tr><th>分类</th><th>菜名</th><th>菜系</th><th>描述</th><th>口味</th><th>原料</th><th>价格</th><th>图片</th></tr>';
+                        _dishData = item.items;
+                        console.log(item.items, _dishData)
+                        item.items.forEach(function (dish) {
+                            html += '<tr>';
+                            html += '<td class ="name">' + dish.name + '</td>';
+                            html += '<td class = "category">' + dish.category + '</td>';
+                            html += '<td class = "cuisine">' + dish.cuisine + '</td>';
+                            html += '<td class = "description">' + dish.description + '</td>';
+                            html += '<td class = "flavors">' + dish.flavors + '</td>';
+                            html += '<td class = "ingredients">' + dish.ingredients + '</td>';
+                            html += '<td class = "price">' + dish.price + '</td>';
+                            html += '<td class = "image"> <input type="file" value="点击上传图片"><button type="button" id="upload" onclick = "uploadImg();">开始上传</button><div id = "imgPath"></div></td>';
+                            html += '</tr>';
+                            imgUrl.push(data.imageUrl);
+                        });
+                        html += '</table>';
+                        $('#product').html(html);
+                    });
+
+                    $('#mainTable').editableTableWidget({
+                        cloneProperties: ['background', 'border', 'outline']
+                    });
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    alert("系统繁忙，请稍后再试");
+                });
+        });
+
+        function uploadImg() {
+
+            var file = $('input[type="file"]').prop('files')[0]
+
+            var formData = new FormData();
+            formData.append('image', file);
+
+            $.ajax({
+                url: '/api/v1/image',
+                type: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (e) {
+                    $('#imgPath').append('<p>图片地址: ' + e.url + '</p>')
+                }
+            })
+        }
+
+        /** 
+        * 遍历表格内容返回数组
+        * @param  Int   id 表格id
+        * @return Array
+        */
+        function getTableContent(id) {
+            var mytable = document.getElementById(id);
+            var data = [];
+            for (var i = 0, rows = mytable.rows.length; i < rows; i++) {
+                for (var j = 0, cells = mytable.rows[i].cells.length; j < cells; j++) {
+                    if (!data[i]) {
+                        data[i] = new Array();
+                    }
+                    data[i][j] = mytable.rows[i].cells[j].innerHTML;
+                }
             }
+            return data;
+        }
 
-            function edit() {
-                console.log("aaaa");
-                var name = $('.name').html();
-                var category = $('.category').html();
-                var cuisine = $('.cuisine').html();
-                var description = $('.description').html();
-                var flavors = $('.flavors').html();
-                var ingredients = $('.ingredients').html();
-                var price = $('.price').html();
-                var img = imgUrl;
+        function edit() {
 
+            console.log("aaaa");
+            console.log('========')
+            console.log(getTableContent('mainTable'))
+
+            // modified dish data
+            var _mDishData = getTableContent('mainTable');
+            var i = 1;
+
+
+            /* 
+                "id": 0,
+                "restaurantId": 0,
+                "cuisineId": 0,
+                "name": "string",
+                "description": "string",
+                "flavors": "string",
+                "ingredients": "string",
+                "category": "string",
+                "price": 0,
+                "image": "string",
+                // "deleted": true,
+                "cloverId": "string"
+            */
+
+            // name category cuisine description flavors ingredients price, imageUrl
+            while (i < _mDishData.length && i < (_dishData.length + 1)) {
+                var _data = _mDishData[i];
+                var _mData = _dishData[i-1];
+                var data = {
+                    "id": _mData.id,
+                    "restaurantId": _mData.restaurantId,
+                    "cuisineId": _mData.cuisineId,
+                    "name": _data[0],
+                    "description": _data[3],
+                    "flavors": _data[4],
+                    "ingredients": _data[5],
+                    "category": _data[1],
+                    "price": _data[6],
+                    "image": $(_data[7])[2].innerHTML,
+                    "cloverId": _mData.cloverId
+                }
+               
+                $.ajax({
+                    url: edit_dish_uri,
+                    type: "POST",
+                    dataType: 'json',
+                    data: data
+                }).done(function (res) {
+                    console.log(res)
+                }).fail(function (err) {
+                    alert("系统繁忙，请稍后再试");
+                })
+                i++;
             }
-        </script>
-    </body>
+            // var name = $('.name').html();
+            // var category = $('.category').html();
+            // var cuisine = $('.cuisine').html();
+            // var description = $('.description').html();
+            // var flavors = $('.flavors').html();
+            // var ingredients = $('.ingredients').html();
+            // var price = $('.price').html();
+            // var img = imgUrl;
+
+        }
+    </script>
+</body>
+
 </html>

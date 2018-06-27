@@ -19,17 +19,16 @@ namespace WebApp.Controllers
         {
             using (var context = new TasteContext())
             {
-                var list = new List<DishModel>();
-                var retrievedDish = context.Dishes.Where(d => d.Id.Equals(dish.Id)).FirstOrDefault();
-
-                retrievedDish.RestaurantId = dish.RestaurantId;
+                var retrievedDish = context.Dishes.FirstOrDefault(d => d.Id == dish.Id);
+                if (retrievedDish == null) return Ok();
+               //retrievedDish.RestaurantId = dish.RestaurantId;
                 retrievedDish.CuisineId = dish.CuisineId;
-                retrievedDish.Name = dish.Name;
+                //retrievedDish.Name = dish.Name;
                 retrievedDish.Description = dish.Description;
                 retrievedDish.Flavors = dish.Flavors;
                 retrievedDish.Ingredients = dish.Ingredients;
                 retrievedDish.Category = dish.Category;
-                retrievedDish.Price = dish.Price;
+                //retrievedDish.Price = dish.Price;
                 retrievedDish.Image = dish.Image;
                 retrievedDish.Deleted = dish.Deleted;
                 retrievedDish.CloverId = dish.CloverId;
