@@ -65,7 +65,6 @@
                             <br />
                             <br />
                             <p id="income">总收入：</p>
-                            <p id="payment">已打款：</p>
 
                         </div>
                     </div>
@@ -81,7 +80,7 @@
         <script src="assets/js/clearmin.min.js"></script>
         <script src="assets/js/demo/home.js"></script>
         <script>
-            var uri = '/api/v1/deposit';
+            var uri = 'api/v1/deposit';
 
             $(document).ready(function () {
 
@@ -95,8 +94,7 @@
                 $.getJSON(uri + '/' + id)
                     .done(function (data) {
                         $.each(data, function (key, item) {
-                            
-                            $('#income').html();
+                            $('#income').append("￥ "+data*6.5/100.00);
                         });
                     })
                     .fail(function (jqXHR, textStatus, err) {

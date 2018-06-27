@@ -91,7 +91,7 @@
         <script src="assets/js/tableEditor.js"></script>
         <script>
             var uri = '/api/v1/menu';
-
+            var imgUrl = [];
             $(document).ready(function () {
                 $(".fa-sign-out").click(function () {
                     sessionStorage.clear();
@@ -100,7 +100,7 @@
                 });
 
                 var id = sessionStorage.getItem("userId");
-                var imgUrl = "";
+                
                 $.getJSON(uri + '/' + id)
                     .done(function (data) {
                         $.each(data, function (key, item) {
@@ -117,7 +117,7 @@
                                 html += '<td class = "price">' + dish.price + '</td>';
                                 html += '<td class = "image"> <input type="file" value="点击上传图片"><button type="button" id="upload" onclick = "uploadImg();">开始上传</button><div id = "imgPath"></div></td>';
                                 html += '</tr>';
-                                imgUrl = data.imageUrl;
+                                imgUrl.push(data.imageUrl);
                             });
                             html += '</table>';
                             $('#product').html(html);
@@ -152,6 +152,7 @@
             }
 
             function edit() {
+                console.log("aaaa");
                 var name = $('.name').html();
                 var category = $('.category').html();
                 var cuisine = $('.cuisine').html();

@@ -18,7 +18,6 @@
 
     $.getJSON(uri)
         .done(function (data) {
-            console.log(data);
             $('#name').append(data.name);
             $('#address').append(data.location);
             $('#owner').append(data.owner);
