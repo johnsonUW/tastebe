@@ -105,9 +105,11 @@
     <script src="assets/js/tableEditor.js"></script>
     <script>
         var uri = '/api/v1/menu';
-        var edit_dish_uri = '/api/v1/dish/editDish'
+        var edit_dish_uri = '/api/v1/dish/editDish';
+        var cui_cate_uri = '/api/v1/dish/cuisinecategory';
         var imgUrl = [];
         var _dishData = [];
+
         $(document).ready(function () {
             $(".fa-sign-out").click(function () {
                 sessionStorage.clear();
@@ -116,39 +118,110 @@
             });
 
             var id = sessionStorage.getItem("userId");
+            $.getJSON(cui_cate_uri).done(function (cuisineCategories) {
+                
+                // [
+                //     {
+                //         "id": 1,
+                //         "name": "川菜",
+                //         "taste": "辣"
+                //     },
+                //     {
+                //         "id": 2,
+                //         "name": "甜品",
+                //         "taste": "甜"
+                //     }
+                // ]
 
-            $.getJSON(uri + '/' + id)
-                .done(function (data) {
-                    
-                    $.each(data, function (key, item) {
+
+
+                // [
+                //     {
+                //         "cuisine": {
+                //             "id": 2,
+                //             "name": "甜品"
+                //         },
+                //         "items": [
+                //             {
+                //                 "id": 1,
+                //                 "restaurantId": 1,
+                //                 "cuisineId": 2,
+                //                 "name": "Latte1",
+                //                 "description": "A good cup of latt1e",
+                //                 "flavors": "Refreshing1",
+                //                 "ingredients": "Latte bean1s",
+                //                 "category": "Coffee",
+                //                 "price": 4.1
+                //             },
+                //             {
+                //                 "id": 2,
+                //                 "restaurantId": 1,
+                //                 "cuisineId": 2,
+                //                 "name": "Mocha1",
+                //                 "description": "Elegant mocha",
+                //                 "flavors": "Refreshing",
+                //                 "ingredients": "Mocha beans",
+                //                 "category": "Coffee",
+                //                 "price": 3.9
+                //             }
+                //         ]
+                //     }
+                // ]
+
+                $.getJSON(uri + '/' + id)
+                    .done(function (data) {
+
+                        
+
                         var html = '<table id="mainTable">';
                         html += '<tr><th>分类</th><th>菜名</th><th>菜系</th><th>描述</th><th>口味</th><th>原料</th><th>价格</th><th>图片</th></tr>';
-                        _dishData = item.items;
-                        console.log(item.items, _dishData)
-                        item.items.forEach(function (dish) {
-                            html += '<tr>';
-                            html += '<td class ="name">' + dish.name + '</td>';
-                            html += '<td class = "category">' + dish.category + '</td>';
-                            html += '<td class = "cuisine">' + dish.cuisine + '</td>';
-                            html += '<td class = "description">' + dish.description + '</td>';
-                            html += '<td class = "flavors">' + dish.flavors + '</td>';
-                            html += '<td class = "ingredients">' + dish.ingredients + '</td>';
-                            html += '<td class = "price">' + dish.price + '</td>';
-                            html += '<td class = "image"> <input type="file" value="点击上传图片"><button type="button" id="upload" onclick = "uploadImg();">开始上传</button><div id = "imgPath"></div></td>';
-                            html += '</tr>';
-                            imgUrl.push(data.imageUrl);
+                        $.each(data, function (key, item) {
+
+                            var _cui_html = '<select class="cuisine-cate">';
+                            var i = 0;
+                            while (i < cuisineCategories.length) {
+                                if(item.cuisine.id === cuisineCategories[i].id){
+                                    _cui_html += '<option selected="selected" value=' + cuisineCategories[i].id + '>' + cuisineCategories[i].name + '</option>'
+                                } else {
+                                    _cui_html += '<option value=' + cuisineCategories[i].id + '>' + cuisineCategories[i].name + '</option>'
+                                }
+                                i++
+                            }
+                            _cui_html += '</select>'
+                            
+                            item.items.forEach(function (dish) {
+                                _dishData.push(dish)
+                                html += '<tr>';
+                                html += '<td class ="name">' + dish.name + '</td>';
+                                html += '<td class = "category">' + dish.category + '</td>';
+                                // html += '<td class = "cuisine">' + dish.cuisine + '</td>';
+                                html += '<td class = "cuisine">' + _cui_html + '</td>';
+                                html += '<td class = "description">' + dish.description + '</td>';
+                                html += '<td class = "flavors">' + dish.flavors + '</td>';
+                                html += '<td class = "ingredients">' + dish.ingredients + '</td>';
+                                html += '<td class = "price">' + dish.price + '</td>';
+                                html += '<td class = "image"> <input type="file" value="点击上传图片"><button type="button" id="upload" onclick = "uploadImg();">开始上传</button><div id = "imgPath"></div></td>';
+                                html += '</tr>';
+                                imgUrl.push(data.imageUrl);
+                            });
+                            
                         });
                         html += '</table>';
                         $('#product').html(html);
+
+                        $('#mainTable').editableTableWidget({
+                            cloneProperties: ['background', 'border', 'outline']
+                        });
+                    })
+                    .fail(function (jqXHR, textStatus, err) {
+                        alert("系统繁忙，请稍后再试");
                     });
 
-                    $('#mainTable').editableTableWidget({
-                        cloneProperties: ['background', 'border', 'outline']
-                    });
-                })
-                .fail(function (jqXHR, textStatus, err) {
-                    alert("系统繁忙，请稍后再试");
-                });
+
+            }).fail(function (err) {
+                
+            })
+
         });
 
         function uploadImg() {
@@ -191,12 +264,9 @@
 
         function edit() {
 
-            console.log("aaaa");
-            console.log('========')
-            console.log(getTableContent('mainTable'))
-
             // modified dish data
             var _mDishData = getTableContent('mainTable');
+            var _mCuisineID = $('.cuisine-cate option:selected');
             var i = 1;
 
 
@@ -218,11 +288,12 @@
             // name category cuisine description flavors ingredients price, imageUrl
             while (i < _mDishData.length && i < (_dishData.length + 1)) {
                 var _data = _mDishData[i];
-                var _mData = _dishData[i-1];
+                var _mData = _dishData[i - 1];
+                
                 var data = {
                     "id": _mData.id,
                     "restaurantId": _mData.restaurantId,
-                    "cuisineId": _mData.cuisineId,
+                    "cuisineId": _mCuisineID[i-1].value,
                     "name": _data[0],
                     "description": _data[3],
                     "flavors": _data[4],
@@ -232,14 +303,15 @@
                     "image": $(_data[7])[2].innerHTML,
                     "cloverId": _mData.cloverId
                 }
-               
+                
+
                 $.ajax({
                     url: edit_dish_uri,
                     type: "POST",
                     dataType: 'json',
                     data: data
                 }).done(function (res) {
-                    console.log(res)
+                    
                 }).fail(function (err) {
                     alert("系统繁忙，请稍后再试");
                 })
