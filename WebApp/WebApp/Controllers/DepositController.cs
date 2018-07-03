@@ -48,6 +48,23 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        [Route("paytips/{restaurantId}")]
+        public IHttpActionResult PayTips(int restaurantId)
+        {
+            using (var context = new TasteContext())
+            {
+                var orders = context.Orders.Where(o => o.RestaurantId == restaurantId).ToList();
+                foreach (var o in orders)
+                {
+                    o.TipInPennies = 0;
+                }
+                context.SaveChanges();
+            }
+
+            return Json("Success");
+        }
+
+        [HttpPost]
         [Route("submit")]
         public IHttpActionResult AddDeposit([FromBody]Deposits deposits)
         {
