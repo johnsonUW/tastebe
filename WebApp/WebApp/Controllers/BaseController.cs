@@ -75,7 +75,8 @@ namespace WebApp.Controllers
                 Location = r.Location,
                 Name = r.Name,
                 Owner = r.Owner,
-                Phone = r.Phone
+                Phone = r.Phone,
+                OutstandingBalance = r.OustandingBalance
             };
         }
     }

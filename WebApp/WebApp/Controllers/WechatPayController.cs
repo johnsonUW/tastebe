@@ -104,6 +104,8 @@ namespace WebApp.Controllers
                 var order = context.Orders.FirstOrDefault(o =>
                     o.OrderId == payment.OrderId && o.UserId == payment.UserId);
                 if (order == null) return Ok();
+                var restaurant = context.Restaurants.FirstOrDefault(r => r.Id == order.RestaurantId);
+                if (restaurant == null) return Ok();
 
                 var merchantId = ConfigurationManager.AppSettings.Get("WeChatMerchantId");
                 var merchantKey = ConfigurationManager.AppSettings.Get("WeChatMerchantKey");
@@ -113,7 +115,7 @@ namespace WebApp.Controllers
 
                 payment.Success = true;
                 order.Paid = true;
-
+                restaurant.OustandingBalance += Convert.ToInt32(notification.Total / restaurant.ExchangeRate);
                 context.SaveChanges();
 
                 return Ok();

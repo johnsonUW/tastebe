@@ -12,19 +12,14 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class Preference1
     {
-        public int Id { get; set; }
-        public string OrderId { get; set; }
         public string UserId { get; set; }
-        public System.DateTime Datetime { get; set; }
-        public int RestaurantId { get; set; }
-        public string RestaurantName { get; set; }
-        public string Details { get; set; }
-        public bool Paid { get; set; }
-        public string TableName { get; set; }
-        public int TipInPennies { get; set; }
-        public int TotalInPennies { get; set; }
-        public int TaxInPennies { get; set; }
+        public string Ingredients { get; set; }
+        public Nullable<int> CuisineId { get; set; }
+        public string Dishes { get; set; }
+        public string Flavors { get; set; }
+        public int Count { get; set; }
+        public int Id { get; set; }
     }
 }
