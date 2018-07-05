@@ -51,6 +51,25 @@ namespace WebApp.Controllers
             return Json("Success");
         }
 
+
+        [HttpGet]
+        [Route("outstandingBalance")]
+        public IHttpActionResult PayOutstandingBalance(int restaurantId, int amount)
+        {
+            using (var context = new TasteContext())
+            {
+                var restaurant = context.Restaurants.FirstOrDefault(r => r.Id == restaurantId);
+                if (restaurant == null)
+                {
+                    return NotFound();
+                }
+
+                restaurant.OustandingBalance -= amount;
+                context.SaveChanges();
+                return Ok();
+            }
+        }
+
         [HttpGet]
         [Route("login")]
         public IHttpActionResult LoginAccount(string username, string password)
@@ -66,14 +85,16 @@ namespace WebApp.Controllers
                 if (password.Equals(user.Password))
                 {
                     return Ok("Success");
-                } 
+                }
                 else
                 {
                     return Unauthorized();
                 }
             }
         }
-        
+
+
+
         [HttpGet]
         [Route("sync")]
         public async Task<IHttpActionResult> SyncWithClover()
