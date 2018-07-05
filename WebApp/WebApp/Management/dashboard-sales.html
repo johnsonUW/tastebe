@@ -100,7 +100,7 @@
 
                 $("#paytips").click(function () {
                     $.ajax({
-                        url: 'api/v1/deposit/' + id,
+                        url: 'api/v1/deposit/paytips' + id,
                         type: 'POST',
                         async: true,
                         success: function (data) {
@@ -114,15 +114,21 @@
                 
                 $.getJSON(uri + '/' + id)
                     .done(function (data) {
-                        $.each(data, function (key, item) {
-                            $('#income').append("￥ "+data*6.5/100.00);
-                        });
+                          $('#income').append("￥ "+data*6.5/100.00);
+                    })
+                    .fail(function (jqXHR, textStatus, err) {
+                        alert("系统繁忙，请稍后再试");
+                    });
+
+                $.getJSON('api/v1/restaurants' + '/' + id)
+                    .done(function (data) {
+                        $('#remaining').append("￥ " + data.outstandingbalance * 6.5 / 100.00);
                     })
                     .fail(function (jqXHR, textStatus, err) {
                         alert("系统繁忙，请稍后再试");
                     });
                 
-                $.getJSON(uri + '/' + id)
+                $.getJSON(tipsUri + '/' + id)
                     .done(function (data) {
                         $.each(data, function (key, item) {
                             $('#tip').append("￥ " + data * 6.5 / 100.00);

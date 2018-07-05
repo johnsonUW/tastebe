@@ -170,9 +170,7 @@
 
                 $.getJSON(uri + '/' + id)
                     .done(function (data) {
-
                         
-
                         var html = '<table id="mainTable">';
                         html += '<tr><th>菜名</th><th>分类</th><th>菜系</th><th>描述</th><th>口味</th><th>原料</th><th>价格</th><th>图片</th></tr>';
                         $.each(data, function (key, item) {

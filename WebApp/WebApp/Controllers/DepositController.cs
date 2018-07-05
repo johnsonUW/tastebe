@@ -46,6 +46,7 @@ namespace WebApp.Controllers
                 return Ok(sumTotal);
             }
         }
+        
 
         [HttpPost]
         [Route("paytips/{restaurantId}")]
@@ -63,6 +64,7 @@ namespace WebApp.Controllers
 
             return Json("Success");
         }
+        
 
         [HttpPost]
         [Route("submit")]
