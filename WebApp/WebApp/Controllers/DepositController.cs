@@ -64,18 +64,18 @@ namespace WebApp.Controllers
             return Json("Success");
         }
 
-        [HttpPost]
-        [Route("submit")]
-        public IHttpActionResult AddDeposit([FromBody]Deposits deposits)
-        {
-            using (var context = new TasteContext())
-            {
-                context.Deposits.Add(deposits);
+        //[HttpPost]
+        //[Route("submit")]
+        //public IHttpActionResult AddDeposit([FromBody]Deposits deposits)
+        //{
+        //    using (var context = new TasteContext())
+        //    {
+        //        context.Deposits.Add(deposits);
 
-                context.SaveChanges();
+        //        context.SaveChanges();
 
-                return Ok("Save success");
-            }
-        }
+        //        return Ok("Save success");
+        //    }
+        //}
     }
 }

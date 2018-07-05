@@ -224,8 +224,6 @@
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Admins" EntityType="Taste.Admins" />
           <EntitySet Name="Preferences" EntityType="Taste.Preference" />
-          <EntitySet Name="Deposits" EntityType="Taste.Deposits" />
-          <EntitySet Name="Preference1" EntityType="Taste.Preference1" />
         </EntityContainer>
         <EntityType Name="Admins">
           <Key>
@@ -236,26 +234,6 @@
           <Property Name="RestaurantName" Type="String" Unicode="true" FixedLength="false" MaxLength="Max" />
         </EntityType>
         <EntityType Name="Preference">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Ingredients" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CuisineId" Type="Int32" />
-          <Property Name="Dishes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Flavors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Count" Type="Int32" Nullable="false" />
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
-        <EntityType Name="Deposits">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RestaurantId" Type="Int32" Nullable="false" />
-          <Property Name="AmountInPennies" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Preference1">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -376,8 +354,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-          <EntitySetMapping Name="Preference1">
-            <EntityTypeMapping TypeName="Taste.Preference1">
+          <EntitySetMapping Name="Preferences">
+            <EntityTypeMapping TypeName="Taste.Preference">
               <MappingFragment StoreEntitySet="Preference">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
