@@ -34,5 +34,6 @@ namespace DataAccess
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Admins> Admins { get; set; }
         public virtual DbSet<Preference> Preferences { get; set; }
+        public virtual DbSet<Deposit> Deposits { get; set; }
     }
 }

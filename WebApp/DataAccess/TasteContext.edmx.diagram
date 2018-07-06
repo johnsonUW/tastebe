@@ -14,6 +14,7 @@
         <EntityTypeShape EntityType="Taste.User" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Taste.Admins" Width="1.5" PointX="10.625" PointY="1.625" />
         <EntityTypeShape EntityType="Taste.Preference" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Taste.Deposit" Width="1.5" PointX="5.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

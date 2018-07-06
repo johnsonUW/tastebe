@@ -21,6 +21,14 @@
           <Property Name="Taste" Type="nvarchar(max)" />
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="Deposits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RestaurantId" Type="int" Nullable="false" />
+          <Property Name="AmountInPennies" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Dishes">
           <Key>
             <PropertyRef Name="Id" />
@@ -115,6 +123,7 @@
         <EntityContainer Name="TasteStoreContainer">
           <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cuisine" EntityType="Self.Cuisine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deposits" EntityType="Self.Deposits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dishes" EntityType="Self.Dishes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderedDishes" EntityType="Self.OrderedDishes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
@@ -224,6 +233,7 @@
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Admins" EntityType="Taste.Admins" />
           <EntitySet Name="Preferences" EntityType="Taste.Preference" />
+          <EntitySet Name="Deposits" EntityType="Taste.Deposit" />
         </EntityContainer>
         <EntityType Name="Admins">
           <Key>
@@ -244,6 +254,14 @@
           <Property Name="Flavors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" Nullable="false" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Deposit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantId" Type="Int32" Nullable="false" />
+          <Property Name="AmountInPennies" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -364,6 +382,15 @@
                 <ScalarProperty Name="CuisineId" ColumnName="CuisineId" />
                 <ScalarProperty Name="Ingredients" ColumnName="Ingredients" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Deposits">
+            <EntityTypeMapping TypeName="Taste.Deposit">
+              <MappingFragment StoreEntitySet="Deposits">
+                <ScalarProperty Name="AmountInPennies" ColumnName="AmountInPennies" />
+                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
