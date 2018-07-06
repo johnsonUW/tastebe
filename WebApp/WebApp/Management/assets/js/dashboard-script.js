@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     
     var username = sessionStorage.getItem("username");
-    if (username != null) {
+    if (username !== null) {
         $(".display_username").append(username);
     } else {
         $(window).attr('location', 'index.html');
@@ -23,7 +23,7 @@
             var html = '<p id="address">餐厅地址:' + data.location + '</p>';
             html += '<p id="owner">老板:' + data.owner + '</p>';
             html += '<p id="phone">联系电话:' + data.phone + "</p>";
-            if (username == "Admin") {
+            if (username === "Admin") {
                 html += '<input id="amount" type="text" name="发放金额: $">';
                 html += '<input id="sendId" type="text" name="接受金额的商家id：">';
                 html += '<button id="send">确认发放</button>'

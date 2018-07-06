@@ -29,7 +29,8 @@ namespace WebApp.Controllers
                 context.Admins.Add(new Admins()
                 {
                     Username = signup.username,
-                    Password = signup.password
+                    Password = signup.password,
+                    RestaurantName = signup.name
                 });
 
                 var res = context.Restaurants.ToList();
