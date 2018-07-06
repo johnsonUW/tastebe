@@ -60,7 +60,8 @@
     <div id="global">
         <div class="container-fluid cm-container-white">
             <h2 style="margin-top:0;">菜单管理</h2>
-            <p>如需添加菜品可在Clover添加，菜单系统会定期与Clover同步</p>
+            <p>如需添加菜品或者修改菜名菜价请在clover修改，每次修改以后请点击下面的按钮同步菜单</p>
+            <button id="sync">同步菜单</button>
         </div>
         <div class="container-fluid">
             <div class="panel panel-default">
@@ -116,6 +117,7 @@
                 $(window).attr('location', 'index.html');
                 return;
             });
+            
 
             var id = sessionStorage.getItem("userId");
             $.getJSON(cui_cate_uri).done(function (cuisineCategories) {
