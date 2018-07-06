@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-clearmin.min.css">
@@ -11,79 +11,116 @@
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
     <title>Tasty Menu Sign Up</title>
     <style></style>
-  </head>
-  <body class="cm-login">
+</head>
+<body class="cm-login">
 
     <div class="col-sm-6 col-md-4 col-lg-3" style="margin: 100px auto; float: none;">
-      <h2>Sign Up </h2>
-      <form id="signup_form" action="dashboard.html">
-      <label>用户名</label>
-      <input type="text" id="username_signup" class="span3">
-      <label>密码</label>
-      <input type="password" id="password_signup" class="span3">
-      <label>确认密码</label>
-      <input type="password" id="password2_signup" class="span3">
-      <label>餐厅名称</label>
-      <input type="text" id="rest_name_signup" class="span3">
-      
-      <label>餐厅地址</label>
-      <input type="text" id="rest_location_signup" class="span3">
-      <label>餐厅电话</label>
-      <input type="text" id="phone_signup" class="span3">
-      <label>拥有者</label>
-      <input type="text" id="owner_signup" class="span3">
-      <label>Clover Id</label>
-      <input type="text" id="cloverid_signup" class="span3">
-      <label>Clover Access Token</label>
-      <input type="text" id="token_signup" class="span3">
-      <input type="submit" onclick="return signup()" value="Sign up" class="btn btn-primary span3 submit">
-      <div class="clearfix"></div>
-      </form>
+        <h2>成功连接Clover</h2>
+        <h3>请填写以下信息完成注册</h3>
+        <form id="signup_form" action="dashboard.html">
+            <label>用户名 (请牢记)</label>
+            <input type="text" id="username_signup" class="span3">
+            <label>密码 (请牢记)</label>
+            <input type="password" id="password_signup" class="span3">
+            <label>确认密码</label>
+            <input type="password" id="password2_signup" class="span3">
+            <label>餐厅名称</label>
+            <input type="text" id="rest_name_signup" class="span3">
+
+            <label>餐厅地址</label>
+            <input type="text" id="rest_location_signup" class="span3">
+            <label>餐厅电话</label>
+            <input type="text" id="phone_signup" class="span3">
+            <label>拥有者</label>
+            <input type="text" id="owner_signup" class="span3">
+            <br/>
+            <input type="submit" onclick="return signup()" value="Sign up" class="btn btn-primary span3 submit">
+            <div class="clearfix"></div>
+        </form>
     </div>
     <script type="text/javascript">
-      function signup(){
-        if($("#password_signup").val() != $("#password2_signup").val()) {
-            alert("Password doesn't match.");
-        } else{
-            var url = "/api/v1/admin/createLogin";
-            var body = {
-              "username": $("#username_signup").val(),
-              "password": $("#password_signup").val(),
-              "name": $("#rest_name_signup").val(),
-              "location": $("#rest_location_signup").val(),
-              "phone": $("#phone_signup").val(),
-              "owner": $("#owner_signup").val(),
-              "cloverId": $("#cloverid_signup").val(),
-              "accessToken": $("#token_signup").val()
-            };
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
 
-            $.ajax({
-                url: url,
-                type: 'POST',
-                dataType: 'text',
-                data: JSON.stringify(body),
-                async: false,
-                contentType: 'application/json',
-                success: function (data) {
-                    console.log(data);
-                    sessionStorage.setItem("username", $("#username_signup").val());
-                    $(window).attr('location', 'dashboard.html');
-                },
-                fail: function (jqXHR, textStatus, err) {
-                    alert("系统繁忙，请稍后再试");
-                },
-                complete: function (response, text) {
-                    if (text == "error") {
-                        var $form = $('form');
-                        $form.submit(function (e) {
-                            e.preventDefault();
-                            return false;
-                        });
-                    }
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
                 }
-            })
+            }
+        };
+
+        var global_merchant_id = "";
+        var global_token = "";
+
+        window.onload = function (e) {
+            global_merchant_id = getUrlParameter("merchant_id");
+            var employee_id = getUrlParameter("employee_id");
+            var client_id = getUrlParameter("client_id");
+            var code = getUrlParameter("code");
+            var curUrl = window.location.href;
+            global_token = curUrl.substr(curUrl.lastIndexOf('=') + 1);
+            // request api token
+            //var urll = "https://sandbox.dev.clover.com/oauth/token?client_id=4N828BG7ST2SW&client_secret=3723e324-10af-20bb-ff79-42c9f38469fd&code=" + code;
+            //var url = "/api/v1/clover/token?url=" + urll;
+
+            //$.get({
+            //    url: url,
+            //    success: function (data) {
+            //        console.log(data);
+            //        //global_token = data.access_token;
+            //    }
+            //})
         }
-      }
-      </script>
-  </body>
+        
+        function signup() {
+            if ($("#password_signup").val() != $("#password2_signup").val()) {
+                alert("Password doesn't match.");
+            } else {
+                var url = "/api/v1/admin/createLogin";
+                var body = {
+                    "username": $("#username_signup").val(),
+                    "password": $("#password_signup").val(),
+                    "name": $("#rest_name_signup").val(),
+                    "location": $("#rest_location_signup").val(),
+                    "phone": $("#phone_signup").val(),
+                    "owner": $("#owner_signup").val(),
+                    "cloverId": global_merchant_id,
+                    "accessToken": global_token
+                };
+
+                console.log(body);
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    dataType: 'text',
+                    data: JSON.stringify(body),
+                    async: false,
+                    contentType: 'application/json',
+                    success: function (data) {
+                        alert("注册成功")
+                        $(window).attr('location', 'index.html');
+                    },
+                    fail: function (jqXHR, textStatus, err) {
+                        alert("系统繁忙，请稍后再试");
+                    },
+                    complete: function (response, text) {
+                        if (text == "error") {
+                            var $form = $('form');
+                            $form.submit(function (e) {
+                                e.preventDefault();
+                                return false;
+                            });
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+</body>
 </html>
