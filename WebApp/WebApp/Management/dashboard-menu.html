@@ -199,7 +199,7 @@
                                 html += '<td class = "ingredients">' + dish.ingredients + '</td>';
                                 html += '<td class = "price">' + dish.price + '</td>';
                                 
-                                html += '<td class = "image"> <input type="file" value="点击上传图片"><button type="button" id="upload">开始上传</button><div id = "imgPath"></div></td>';
+                                html += '<td class = "image"> <input type="file" value="点击上传图片"><button type="button" id="upload">开始上传</button><div id = "imgPath"><p>图片地址: <span>' + (typeof dish.imageUrl === 'undefined'?'':dish.imageUrl) + '</span></p></div></td>';
                                 html += '</tr>';
                                 imgUrl.push(data.imageUrl);
                             });
@@ -241,7 +241,7 @@
                 processData: false,
                 success: function (e) {
                     // $('#imgPath').append('<p>图片地址: <span>' + e + '</span></p>')
-                    $(event.target).siblings('#imgPath').append('<p>图片地址: <span>' + e + '</span></p>')
+                    $(event.target).siblings('#imgPath').children().find('span').text(e)
                 }
             })
         }
