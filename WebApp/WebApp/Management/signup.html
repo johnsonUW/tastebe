@@ -15,23 +15,23 @@
 <body class="cm-login">
 
     <div class="col-sm-6 col-md-4 col-lg-3" style="margin: 100px auto; float: none;">
-        <h2>成功连接Clover</h2>
-        <h3>请填写以下信息完成注册</h3>
+        <h2>Successfully connected to Clover. 成功连接Clover</h2>
+        <h3>Please fill out the form to complete registration. 请填写以下信息完成注册</h3>
         <form id="signup_form" action="dashboard.html">
-            <label>用户名 (请牢记)</label>
+            <label>Username - 用户名 (请牢记)</label>
             <input type="text" id="username_signup" class="span3">
-            <label>密码 (请牢记)</label>
+            <label>Password - 密码 (请牢记)</label>
             <input type="password" id="password_signup" class="span3">
-            <label>确认密码</label>
+            <label>Confirm password - 确认密码</label>
             <input type="password" id="password2_signup" class="span3">
-            <label>餐厅名称</label>
+            <label>Restaurant name - 餐厅名称</label>
             <input type="text" id="rest_name_signup" class="span3">
 
-            <label>餐厅地址</label>
+            <label>Address - 餐厅地址</label>
             <input type="text" id="rest_location_signup" class="span3">
-            <label>餐厅电话</label>
+            <label>Phone - 餐厅电话</label>
             <input type="text" id="phone_signup" class="span3">
-            <label>拥有者</label>
+            <label>Owner - 拥有者</label>
             <input type="text" id="owner_signup" class="span3">
             <br/>
             <input type="submit" onclick="return signup()" value="Sign up" class="btn btn-primary span3 submit">
@@ -103,11 +103,11 @@
                     async: false,
                     contentType: 'application/json',
                     success: function (data) {
-                        alert("注册成功")
+                        alert("Registered - 注册成功")
                         $(window).attr('location', 'index.html');
                     },
                     fail: function (jqXHR, textStatus, err) {
-                        alert("系统繁忙，请稍后再试");
+                        alert("Please try again later - 系统繁忙，请稍后再试");
                     },
                     complete: function (response, text) {
                         if (text == "error") {

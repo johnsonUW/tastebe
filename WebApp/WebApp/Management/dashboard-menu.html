@@ -26,15 +26,9 @@
             <div id="cm-menu-items-wrapper">
                 <div id="cm-menu-scroller">
                     <ul class="cm-menu-items">
-                        <li class="active">
-                            <a href="dashboard.html" class="sf-house">主页</a>
-                        </li>
-                        <li>
-                            <a href="dashboard-sales.html" class="sf-dashboard">收入管理</a>
-                        </li>
-                        <li>
-                            <a href="dashboard-menu.html" class="sf-brick">菜单管理</a>
-                        </li>
+                        <li class="active"><a href="dashboard.html" class="sf-house">Home - 主页</a></li>
+                        <li><a href="dashboard-sales.html" class="sf-dashboard">Manage earnings - 收入管理</a></li>
+                        <li><a href="dashboard-menu.html" class="sf-brick">Manage menu - 菜单管理</a></li>
                     </ul>
                 </div>
             </div>
@@ -44,7 +38,7 @@
         <nav class="cm-navbar cm-navbar-primary">
             <div class="btn btn-primary md-menu-white hidden-md hidden-lg" data-toggle="cm-menu"></div>
             <div class="cm-flex">
-                <h1>菜单管理</h1>
+                <h1>Manage menu - 菜单管理</h1>
             </div>
             <div class="dropdown pull-right">
                 <button class="btn btn-primary md-account-circle-white" data-toggle="dropdown"></button>
@@ -59,9 +53,9 @@
     </header>
     <div id="global">
         <div class="container-fluid cm-container-white">
-            <h2 style="margin-top:0;">菜单管理</h2>
-            <p>如需添加菜品或者修改菜名菜价请在clover修改，每次修改以后请点击下面的按钮同步菜单</p>
-            <button id="sync">同步菜单</button>
+            <h2 style="margin-top:0;">Manage menu - 菜单管理</h2>
+            <p>If you need to add dishes to your menu, please do so in Clover and hit sync button - 如需添加菜品或者修改菜名菜价请在clover修改，每次修改以后请点击下面的按钮同步菜单</p>
+            <button id="sync">Sync menu - 同步菜单</button>
             <h2 id="sync_succ"></h2>
         </div>
         <div class="container-fluid">
@@ -70,8 +64,8 @@
                     <span class="svg-48">
                         <img src="assets/img/sf/address-book.svg" alt="cat">
                     </span>
-                    <h2>菜单</h2>
-                    <h4>单击列表中的文字进行修改，完成后点击保存修改。如需要上传图片，请在修改菜单前先上传图片！</h4>
+                    <h2>Menu - 菜单</h2>
+                    <h4>Click on text to edit and save - 单击列表中的文字进行修改，完成后点击保存修改。如需要上传图片，请在修改菜单前先上传图片！</h4>
                 </div>
                 <div class="panel-heading"></div>
                 <div class="panel-body" id="demo-buttons">
@@ -126,7 +120,7 @@
                     contentType: false,
                     processData: false,
                     success: function (e) {
-                        $('#sync_succ').append("同步成功！");
+                        $('#sync_succ').append("Success - 同步成功！");
                     }
                 });
             });
@@ -187,7 +181,7 @@
                     .done(function (data) {
                         
                         var html = '<table id="mainTable">';
-                        html += '<tr><th>菜名</th><th>分类</th><th>菜系</th><th>描述</th><th>口味</th><th>原料</th><th>价格</th><th>图片</th></tr>';
+                        html += '<tr><th>Dish name - 菜名</th><th>Category - 分类</th><th>Cuisine - 菜系</th><th>Description - 描述</th><th>Flavor - 口味</th><th>Ingredients - 原料</th><th>Price - 价格</th><th>Image - 图片</th></tr>';
                         $.each(data, function (key, item) {
 
                             var _cui_html = '<select class="cuisine-cate">';
@@ -214,7 +208,7 @@
                                 html += '<td class = "ingredients">' + dish.ingredients + '</td>';
                                 html += '<td class = "price">' + dish.price + '</td>';
                                 
-                                html += '<td class = "image"> <input type="file" value="点击上传图片"><button type="button" id="upload">开始上传</button><div id = "imgPath"><p">图片地址: <span>' + (typeof dish.imageUrl === 'undefined'?'':dish.imageUrl) + '</span></p></div></td>';
+                                html += '<td class = "image"> <input type="file" value="Choose image - 点击上传图片"><button type="button" id="upload">Upload - 开始上传</button><div id = "imgPath"><p">Url - 图片地址: <span>' + (typeof dish.imageUrl === 'undefined'?'':dish.imageUrl) + '</span></p></div></td>';
                                 html += '</tr>';
                                 imgUrl.push(data.imageUrl);
                             });
@@ -231,7 +225,7 @@
                         });
                     })
                     .fail(function (jqXHR, textStatus, err) {
-                        alert("系统繁忙，请稍后再试");
+                        alert("Please try again later - 系统繁忙，请稍后再试");
                     });
 
 
@@ -332,7 +326,7 @@
                 }).done(function (res) {
                     
                 }).fail(function (err) {
-                    alert("系统繁忙，请稍后再试");
+                    alert("Please try again later - 系统繁忙，请稍后再试");
                 })
                 i++;
             }
