@@ -198,7 +198,8 @@
                                 html += '<td class = "flavors">' + dish.flavors + '</td>';
                                 html += '<td class = "ingredients">' + dish.ingredients + '</td>';
                                 html += '<td class = "price">' + dish.price + '</td>';
-                                html += '<td class = "image"> <input type="file" value="点击上传图片"><button type="button" id="upload" onclick = "uploadImg();">开始上传</button><div id = "imgPath"></div></td>';
+                                
+                                html += '<td class = "image"> <input type="file" value="点击上传图片"><button type="button" id="upload">开始上传</button><div id = "imgPath"></div></td>';
                                 html += '</tr>';
                                 imgUrl.push(data.imageUrl);
                             });
@@ -206,6 +207,9 @@
                         });
                         html += '</table>';
                         $('#product').html(html);
+                        $('.image>button').on('click', function(e){
+                            uploadImg(e)
+                        })
 
                         $('#mainTable').editableTableWidget({
                             cloneProperties: ['background', 'border', 'outline']
@@ -222,13 +226,13 @@
 
         });
 
-        function uploadImg() {
+        function uploadImg(event) {
 
             var file = $('input[type="file"]').prop('files')[0]
 
             var formData = new FormData();
             formData.append('image', file);
-
+            
             $.ajax({
                 url: '/api/v1/image',
                 type: 'post',
@@ -236,7 +240,8 @@
                 contentType: false,
                 processData: false,
                 success: function (e) {
-                    $('#imgPath').append('<p>图片地址: ' + e.url + '</p>')
+                    // $('#imgPath').append('<p>图片地址: <span>' + e + '</span></p>')
+                    $(event.target).siblings('#imgPath').append('<p>图片地址: <span>' + e + '</span></p>')
                 }
             })
         }
@@ -286,7 +291,9 @@
             // name category cuisine description flavors ingredients price, imageUrl
             while (i < _mDishData.length && i < (_dishData.length + 1)) {
                 var _data = _mDishData[i];
+                
                 var _mData = _dishData[i - 1];
+                var _imgSrcELe = $(_data[7])[2].getElementsByTagName('span')[0]
                 
                 var data = {
                     "id": _mData.id,
@@ -298,10 +305,9 @@
                     "ingredients": _data[5],
                     "category": _data[1],
                     "price": _data[6],
-                    "image": $(_data[7])[2].innerHTML,
+                    "image":_imgSrcELe && _imgSrcELe.innerHTML || '',
                     "cloverId": _mData.cloverId
                 }
-                
 
                 $.ajax({
                     url: edit_dish_uri,
