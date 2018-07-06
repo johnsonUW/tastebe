@@ -8,6 +8,11 @@
         return;
     }
 
+    if (username == "Admin") {
+
+
+    }
+
     $(".fa-sign-out").click(function () {
         sessionStorage.clear();
         $(window).attr('location', 'index.html');

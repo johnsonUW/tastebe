@@ -86,8 +86,8 @@
         <script src="assets/js/clearmin.min.js"></script>
         <script src="assets/js/demo/home.js"></script>
         <script>
-            var uri = 'api/v1/deposit';
-            var tipsUri = 'api/v1/deposit/tips'
+            var uri = '/api/v1/deposit';
+            var tipsUri = '/api/v1/deposit/tips'
             $(document).ready(function () {
                 
                 $(".fa-sign-out").click(function () {
@@ -100,7 +100,7 @@
 
                 $("#paytips").click(function () {
                     $.ajax({
-                        url: 'api/v1/deposit/paytips' + id,
+                        url: '/api/v1/deposit/paytips/' + id,
                         type: 'POST',
                         async: true,
                         success: function (data) {
@@ -114,15 +114,15 @@
                 
                 $.getJSON(uri + '/' + id)
                     .done(function (data) {
-                          $('#income').append("￥ "+data*6.5/100.00);
+                        $('#income').append("￥ " + ((data / 100.00) / 6.50).toFixed(2));
                     })
                     .fail(function (jqXHR, textStatus, err) {
                         alert("系统繁忙，请稍后再试");
                     });
 
-                $.getJSON('api/v1/restaurants' + '/' + id)
+                $.getJSON('/api/v1/restaurants' + '/' + id)
                     .done(function (data) {
-                        $('#remaining').append("￥ " + data.outstandingbalance * 6.5 / 100.00);
+                        $('#remaining').append("￥ " + ((data.outstandingBalance / 100.00) / 6.50).toFixed(2));
                     })
                     .fail(function (jqXHR, textStatus, err) {
                         alert("系统繁忙，请稍后再试");
@@ -131,7 +131,7 @@
                 $.getJSON(tipsUri + '/' + id)
                     .done(function (data) {
                         $.each(data, function (key, item) {
-                            $('#tip').append("￥ " + data * 6.5 / 100.00);
+                            $('#tip').append("￥ " + ((data / 100.00) / 6.50).toFixed(2));
                         });
                     })
                 
