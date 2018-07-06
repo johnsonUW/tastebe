@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/07/2018 13:36:10
--- Generated from EDMX file: E:\repo\tastebe\WebApp\DataAccess\TasteContext.edmx
+-- Date Created: 07/05/2018 20:47:06
+-- Generated from EDMX file: C:\Users\jason\Documents\repo\tastebe\WebApp\DataAccess\TasteContext.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -27,6 +27,9 @@ IF OBJECT_ID(N'[dbo].[Admins]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Cuisine]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Cuisine];
+GO
+IF OBJECT_ID(N'[dbo].[Deposits]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Deposits];
 GO
 IF OBJECT_ID(N'[dbo].[Dishes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Dishes];
@@ -127,9 +130,10 @@ CREATE TABLE [dbo].[Restaurants] (
     [Phone] nvarchar(20)  NULL,
     [Owner] nvarchar(40)  NULL,
     [Image] nvarchar(max)  NULL,
-    [AccessToken] nvarchar(500)  NULL,
     [IsSandbox] bit  NOT NULL,
-    [ExchangeRate] float  NOT NULL
+    [ExchangeRate] float  NOT NULL,
+    [OustandingBalance] int  NOT NULL,
+    [AccessToken] nvarchar(max)  NOT NULL
 );
 GO
 
