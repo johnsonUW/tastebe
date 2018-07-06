@@ -118,16 +118,19 @@
                 $(window).attr('location', 'index.html');
                 return;
             });
+
+            $('#sync').click(function () {
+                $.ajax({
+                    url: '/api/v1/admin/sync',
+                    type: 'post',
+                    contentType: false,
+                    processData: false,
+                    success: function (e) {
+                        $('#sync_succ').append("同步成功！");
+                    }
+                });
+            });
             
-            $.ajax({
-                url: '/api/v1/admin/sync',
-                type: 'post',
-                contentType: false,
-                processData: false,
-                success: function (e) {
-                    $('#sync_succ').append("同步成功！");
-                }
-            })
 
             var id = sessionStorage.getItem("userId");
             $.getJSON(cui_cate_uri).done(function (cuisineCategories) {
@@ -211,7 +214,7 @@
                                 html += '<td class = "ingredients">' + dish.ingredients + '</td>';
                                 html += '<td class = "price">' + dish.price + '</td>';
                                 
-                                html += '<td class = "image"> <input type="file" value="点击上传图片"><button type="button" id="upload">开始上传</button><div id = "imgPath"><p style="display:none">图片地址: <span>' + (typeof dish.imageUrl === 'undefined'?'':dish.imageUrl) + '</span></p></div></td>';
+                                html += '<td class = "image"> <input type="file" value="点击上传图片"><button type="button" id="upload">开始上传</button><div id = "imgPath"><p">图片地址: <span>' + (typeof dish.imageUrl === 'undefined'?'':dish.imageUrl) + '</span></p></div></td>';
                                 html += '</tr>';
                                 imgUrl.push(data.imageUrl);
                             });
