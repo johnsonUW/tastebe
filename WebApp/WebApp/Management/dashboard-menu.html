@@ -62,7 +62,7 @@
             <h2 style="margin-top:0;">菜单管理</h2>
             <p>如需添加菜品或者修改菜名菜价请在clover修改，每次修改以后请点击下面的按钮同步菜单</p>
             <button id="sync">同步菜单</button>
-            <h2>同步成功</h2>
+            <h2 id="sync_succ"></h2>
         </div>
         <div class="container-fluid">
             <div class="panel panel-default">
@@ -125,7 +125,7 @@
                 contentType: false,
                 processData: false,
                 success: function (e) {
-                    
+                    $('#sync_succ').append("同步成功！");
                 }
             })
 
