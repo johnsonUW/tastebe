@@ -28,7 +28,7 @@ namespace WebApp
 
             config.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            //config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
 
             config.MessageHandlers.Add(new ApiRequestHandler());
         }

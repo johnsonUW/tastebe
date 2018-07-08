@@ -28,13 +28,13 @@ namespace Framework.Wechat
             };
         }
 
-        public static async Task<Stream> GetMiniProgramQrCodeAsync(string id, string appId, string appSecret)
+        public static async Task<Stream> GetMiniProgramQrCodeAsync(string id, string tableNumber, string appId, string appSecret)
         {
             var token = GetAccessTokenAsync(appId, appSecret);
             var client = GetClient();
             var data = new WechatQrCodeRequestModel
             {
-                Path = $"pages/homepage/index?id={id}"
+                Path = $"pages/homepage/index?id={id}&tableNumber={tableNumber}"
             };
             var content = JsonConvert.SerializeObject(data);
             var result = await client.PostAsync($"cgi-bin/wxaapp/createwxaqrcode?access_token={token}", new StringContent(content));
