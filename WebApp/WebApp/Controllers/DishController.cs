@@ -39,6 +39,34 @@ namespace WebApp.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("addDish")]
+        public IHttpActionResult AddDishInformation([FromBody] Dish dish)
+        {
+            using (var context = new TasteContext())
+            {
+                if (dish == null) return Ok("dish is null");
+
+                Dish d = new Dish
+                {
+                    RestaurantId = dish.RestaurantId,
+                    CuisineId = dish.CuisineId,
+                    Name = dish.Name,
+                    Description = dish.Description,
+                    Flavors = dish.Flavors,
+                    Ingredients = dish.Ingredients,
+                    Category = dish.Category,
+                    Price = dish.Price,
+                    Image = dish.Image,
+                    Deleted = false
+                };
+
+                context.SaveChanges();
+
+                return Ok("Save success");
+            }
+        }
+
         [HttpGet]
         [Route("cuisinecategory")]
         public IHttpActionResult GetAllCategory()
