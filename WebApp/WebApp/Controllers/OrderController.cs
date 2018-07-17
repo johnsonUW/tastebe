@@ -21,7 +21,7 @@ namespace WebApp.Controllers
             {
                 var order = context.Orders.FirstOrDefault(o => o.OrderId == or.OrderId);
                 var items = context.OrderedDishes.Where(od => od.OrderId == or.OrderId).ToList();
-                if (order != null)
+                if (order != null && !order.Paid)
                 {
                     context.Orders.Remove(order);
                     context.SaveChanges();
