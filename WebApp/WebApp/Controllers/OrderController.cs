@@ -13,6 +13,25 @@ namespace WebApp.Controllers
     [RoutePrefix("api/v1/orders")]
     public class OrderController : BaseController
     {
+        [HttpDelete]
+        [Route]
+        public IHttpActionResult DeleteOrder(Order or)
+        {
+            using (var context = new TasteContext())
+            {
+                var order = context.Orders.FirstOrDefault(o => o.OrderId == or.OrderId);
+                var items = context.OrderedDishes.Where(od => od.OrderId == or.OrderId).ToList();
+                if (order != null)
+                {
+                    context.Orders.Remove(order);
+                    context.SaveChanges();
+                    context.OrderedDishes.RemoveRange(items);
+                    context.SaveChanges();
+                }
+                return Ok();
+            }
+        }
+
         [HttpGet]
         [Route("{userId}")]
         public IHttpActionResult GetOrderHistoryById(string userId, int restaurantId)
