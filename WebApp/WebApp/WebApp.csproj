@@ -308,6 +308,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="tasteservice.PublishSettings" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Management\assets\fonts\fontawesome-webfont.eot" />

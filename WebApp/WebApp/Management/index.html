@@ -19,57 +19,62 @@
     </div>
     
     <div class="col-sm-6 col-md-4 col-lg-3" style="margin:40px auto; float:none;">
-      <form>
-	<div class="col-xs-12">
-        <h4>Login</h4>
-          <div class="form-group">
-	    <div class="input-group">
-            
-	      <div class="input-group-addon"><i class="fa fa-fw fa-user"></i></div>
-	      <input type="text" id="username"  class="form-control" placeholder="Username">
-	    </div>
-          </div>
-          <div class="form-group">
-	    <div class="input-group">
-	      <div class="input-group-addon"><i class="fa fa-fw fa-lock"></i></div>
-	      <input type="password" id="password"  class="form-control" placeholder="Password">
-	    </div>
-          </div>
-        </div>
-	<div class="col-xs-6">
-          <div class="checkbox"><label><input type="checkbox"> Remember me</label></div>
-	</div><div class="col-xs-6">
-          <button type="submit" onclick="return login()" class="btn btn-block btn-primary">Sign in</button>
-          
-        </div>
-      </form>
-      <br/>
-      <div class="col-xs-12">
-          <a href="https://sandbox.dev.clover.com/oauth/authorize?client_id=4N828BG7ST2SW"><button class="btn btn-block btn-block">Sign Up with Clover</button></a>
-        </div>
-    </div>
-    <script type="text/javascript">
-    	function login(){
-    		var url = "/api/v1/admin/login";
-    		var username = $("#username").val();
-    		var password = $("#password").val();
-    		var xhttp = new XMLHttpRequest();
-    		xhttp.open("GET", url+"?username="+username+"&password="+password, false);
-			xhttp.onreadystatechange = function() {
-			    if (this.readyState == 4 && this.status == 200) {
-			       // Typical action to be performed when the document is ready:
-			       sessionStorage.setItem("username", username);
-			       $(window).attr('location','dashboard.html');
-   				} else{
-   					alert("Incorrect username/password. 用户名或密码填写错误");
-   					return;
-   				}
-			};
-		
-			xhttp.send();
-			return false;
-    	}
+        <form>
+            <div class="col-xs-12">
+                <h4>Login</h4>
+                <div class="form-group">
+                    <div class="input-group">
 
-    </script>
-  </body>
+                        <div class="input-group-addon"><i class="fa fa-fw fa-user"></i></div>
+                        <input type="text" id="username" class="form-control" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-fw fa-lock"></i></div>
+                        <input type="password" id="password" class="form-control" placeholder="Password">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="checkbox"><label><input type="checkbox"> Remember me</label></div>
+            </div><div class="col-xs-6">
+                <button type="submit" onclick="return login()" class="btn btn-block btn-primary">Sign in</button>
+            </div>
+        </form>
+        <br />
+        <div class="col-xs-12">
+            <a href="https://sandbox.dev.clover.com/oauth/authorize?client_id=4N828BG7ST2SW"><button class="btn btn-block btn-block">Sign Up with Clover</button></a>
+        </div>
+        <div class="col-xs-12">
+            <br />
+            <br />
+            <br />
+            <p>By signup or login indicate that you agree to our </p><a href="terms.html" target="_blank">Terms</a> and have read the <a href="policy.html" target="_blank">Privacy Policy</a></p>
+        </div>
+        </div>
+        <script type="text/javascript">
+            function login() {
+                var url = "/api/v1/admin/login";
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url + "?username=" + username + "&password=" + password, false);
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // Typical action to be performed when the document is ready:
+                        sessionStorage.setItem("username", username);
+                        $(window).attr('location', 'dashboard.html');
+                    } else {
+                        alert("Incorrect username/password. 用户名或密码填写错误");
+                        return;
+                    }
+                };
+
+                xhttp.send();
+                return false;
+            }
+
+        </script>
+</body>
 </html>
