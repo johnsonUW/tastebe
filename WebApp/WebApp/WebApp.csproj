@@ -293,6 +293,7 @@
     <Content Include="Management\index.html" />
     <Content Include="Management\policy.html" />
     <Content Include="Management\signup.html" />
+    <None Include="Properties\PublishProfiles\tasteservice - FTP.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Management\terms.html" />
     <Content Include="Scripts\jquery-3.3.1.js" />
