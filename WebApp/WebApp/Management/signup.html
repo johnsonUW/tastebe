@@ -104,7 +104,8 @@
                     contentType: 'application/json',
                     success: function (data) {
                         alert("Registered - 注册成功")
-                        $(window).attr('location', 'index.html');
+                        sessionStorage.setItem("username", username);
+                        $(window).attr('location', 'dashboard.html');
                     },
                     fail: function (jqXHR, textStatus, err) {
                         alert("Please try again later - 系统繁忙，请稍后再试");
