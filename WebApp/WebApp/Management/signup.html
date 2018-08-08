@@ -104,7 +104,7 @@
                     contentType: 'application/json',
                     success: function (data) {
                         alert("Registered - 注册成功")
-                        sessionStorage.setItem("username", username);
+                        sessionStorage.setItem("username", $("#username_signup").val());
                         $(window).attr('location', 'dashboard.html');
                     },
                     fail: function (jqXHR, textStatus, err) {
