@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     
     var username = sessionStorage.getItem("username");
-    if (username !== null) {
+    if (username) {
         $(".display_username").append(username);
     } else {
         $(window).attr('location', 'index.html');

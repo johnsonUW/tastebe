@@ -1,19 +1,69 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using DataAccess;
 using Framework.Clover;
-using WebGrease.Css.Extensions;
 
 namespace WebApp.Controllers
 {
     [RoutePrefix("api/v1/admin")]
     public class AdminController : BaseController
     {
+        [HttpPost]
+        [Route("checkIfCloverUserExists")]
+        public IHttpActionResult CheckIfCloverUserExists([FromBody]Signup signup)
+        {
+            using (var context = new TasteContext())
+            {
+                if (context.Admins.Where(a => a.Username.Equals(signup.username)).ToList().Count() > 0)
+                {
+                    return Json("Exist");
+                } 
+                else
+                {
+                    return Json("Doesn't exist");
+                }
+            }
+        }
+
+        [HttpPost]
+        [Route("createCloverLogin")]
+        public IHttpActionResult CreateCloverLogin([FromBody]Signup signup)
+        {
+            using (var context = new TasteContext())
+            {
+                if (context.Admins.Where(a => a.Username.Equals(signup.username)).ToList().Count() > 0)
+                {
+                    return Unauthorized();
+                }
+
+                context.Admins.Add(new Admins()
+                {
+                    Username = signup.username,
+                    Password = signup.password,
+                    RestaurantName = signup.username
+                });
+
+                var res = context.Restaurants.ToList();
+                context.Restaurants.Add(new Restaurant()
+                {
+                    CloverId = signup.username,
+                    Name = "",
+                    Location = "",
+                    Phone = "",
+                    Owner = "",
+                    Image = "",
+                    AccessToken = signup.password,
+                    ExchangeRate = 6.5,
+                    IsSandbox = false
+                });
+                context.SaveChanges();
+            }
+
+            return Json("Success");
+        }
+
         [HttpPost]
         [Route("createLogin")]
         public IHttpActionResult CreateLogin([FromBody]Signup signup)
@@ -93,8 +143,6 @@ namespace WebApp.Controllers
                 }
             }
         }
-
-
 
         [HttpGet]
         [Route("sync")]

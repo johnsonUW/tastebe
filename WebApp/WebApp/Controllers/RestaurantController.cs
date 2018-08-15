@@ -45,10 +45,23 @@ namespace WebApp.Controllers
             using (var context = new TasteContext())
             {
                 var admin = context.Admins.FirstOrDefault(a => a.Username == username);
-                var res = context.Restaurants.FirstOrDefault(r => r.Name.Equals(admin.RestaurantName));
+                if (admin != null)
+                {
+                    var res = context.Restaurants.FirstOrDefault(r => r.Name.Equals(admin.RestaurantName));
 
-                if (res != null) return Ok(ToModel(res));
-                return Ok(GetErrorModel(ApiErrorCode.RestaurantDoesNotExist));
+                    if (res != null)
+                    {
+                        return Ok(ToModel(res));
+                    }
+                    else
+                    {
+                        return Ok(GetErrorModel(ApiErrorCode.RestaurantDoesNotExist));
+                    }
+                }
+                else
+                {
+                    return Ok(GetErrorModel(ApiErrorCode.RestaurantDoesNotExist));
+                }
             }
         }
     }

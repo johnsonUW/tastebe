@@ -44,7 +44,7 @@
         </form>
         <br />
         <div class="col-xs-12">
-            <a href="https://dev.clover.com/oauth/authorize?client_id=4N828BG7ST2SW"><button class="btn btn-block btn-block">Sign Up with Clover</button></a>
+            <a href="https://www.clover.com/oauth/authorize?client_id=MMWF33E91QQHE"><button class="btn btn-block btn-block">Sign Up with Clover</button></a>
         </div>
         <div class="col-xs-12">
             <br />
@@ -75,6 +75,137 @@
                 return false;
             }
 
+            // From clover
+            var getUrlParameter = function getUrlParameter(sParam) {
+                var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                    sURLVariables = sPageURL.split('&'),
+                    sParameterName,
+                    i;
+
+                for (i = 0; i < sURLVariables.length; i++) {
+                    sParameterName = sURLVariables[i].split('=');
+
+                    if (sParameterName[0] === sParam) {
+                        return sParameterName[1] === undefined ? true : sParameterName[1];
+                    }
+                }
+            };
+
+            var global_merchant_id;
+            var global_token;
+
+            window.onload = function (e) {
+                global_merchant_id = getUrlParameter("merchant_id");
+                var employee_id = getUrlParameter("employee_id");
+                var client_id = getUrlParameter("client_id");
+                var code = getUrlParameter("code");
+                var curUrl = window.location.href;
+                global_token = curUrl.substr(curUrl.lastIndexOf('=') + 1);
+                // request api token
+                //var urll = "https://sandbox.dev.clover.com/oauth/token?client_id=4N828BG7ST2SW&client_secret=3723e324-10af-20bb-ff79-42c9f38469fd&code=" + code;
+                //var url = "/api/v1/clover/token?url=" + urll;
+
+                //$.get({
+                //    url: url,
+                //    success: function (data) {
+                //        console.log(data);
+                //        //global_token = data.access_token;
+                //    }
+                //})
+                CheckIfCloverUserExists();
+            }
+
+            function CheckIfCloverUserExists() {
+                console.log('ids');
+                console.log(global_merchant_id);
+                console.log(global_token);
+
+                var url = "/api/v1/admin/checkIfCloverUserExists";
+                var body = {
+                    "username": global_merchant_id,
+                    "password": global_token,
+                };
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    dataType: 'text',
+                    data: JSON.stringify(body),
+                    async: false,
+                    contentType: 'application/json',
+                    success: function (data) {
+                        console.log(data);
+                        if (data === "Exist") {
+                            // login
+                            var url = "/api/v1/admin/login";
+                            var username = global_merchant_id;
+                            var password = global_token;
+                            var xhttp = new XMLHttpRequest();
+                            xhttp.open("GET", url + "?username=" + username + "&password=" + password, false);
+                            xhttp.onreadystatechange = function () {
+                                if (this.readyState == 4 && this.status == 200) {
+                                    // Typical action to be performed when the document is ready:
+                                    sessionStorage.setItem("username", username);
+                                    $(window).attr('location', 'dashboard.html');
+                                } else {
+                                    alert("Incorrect username/password. 用户名或密码填写错误");
+                                    return;
+                                }
+                            };
+
+                            xhttp.send();
+                        } else if (global_merchant_id && global_token){
+                            // signup
+
+                            var url = "/api/v1/admin/createCloverLogin";
+                            var body = {
+                                "username": global_merchant_id,
+                                "password": global_token,
+                                "cloverId": global_merchant_id,
+                                "accessToken": global_token
+                            };
+
+                            $.ajax({
+                                url: url,
+                                type: 'POST',
+                                dataType: 'text',
+                                data: JSON.stringify(body),
+                                async: false,
+                                contentType: 'application/json',
+                                success: function (data) {
+                                    alert("Registered - 注册成功")
+                                    sessionStorage.setItem("username", global_merchant_id);
+                                    $(window).attr('location', 'dashboard.html');
+                                },
+                                fail: function (jqXHR, textStatus, err) {
+                                    alert("Please try again later - 系统繁忙，请稍后再试");
+                                },
+                                complete: function (response, text) {
+                                    if (text == "error") {
+                                        var $form = $('form');
+                                        $form.submit(function (e) {
+                                            e.preventDefault();
+                                            return false;
+                                        });
+                                    }
+                                }
+                            })
+                        }
+                    },
+                    fail: function (jqXHR, textStatus, err) {
+                        alert("Please try again later - 系统繁忙，请稍后再试");
+                    },
+                    complete: function (response, text) {
+                        if (text == "error") {
+                            var $form = $('form');
+                            $form.submit(function (e) {
+                                e.preventDefault();
+                                return false;
+                            });
+                        }
+                    }
+                })
+            }
         </script>
 </body>
 </html>
