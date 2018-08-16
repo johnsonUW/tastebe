@@ -1,23 +1,22 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-clearmin.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/roboto.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/material-design.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/small-n-flat.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
-        <script src="assets/js/lib/jquery-2.1.3.min.js"></script>
-        <script src="assets/js/jquery.mousewheel.min.js"></script>
-        <script src="assets/js/jquery.cookie.min.js"></script>
-        <script src="assets/js/fastclick.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/clearmin.min.js"></script>
-        <script src="assets/js/demo/home.js"></script>
-        <script src="assets/js/dashboard-script.js"></script>
-        <title>TastyMenu</title>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-clearmin.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/roboto.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/material-design.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/small-n-flat.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script src="assets/js/jquery.mousewheel.min.js"></script>
+    <script src="assets/js/jquery.cookie.min.js"></script>
+    <script src="assets/js/fastclick.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/clearmin.min.js"></script>
+    <script src="assets/js/demo/home.js"></script>
+    <title>TastyMenu</title>
+</head>
     <body class="cm-no-transition cm-1-navbar">
         <div id="cm-menu">
             <nav class="cm-navbar cm-navbar-primary">
@@ -67,14 +66,21 @@
                     </div>
                     <div class="panel-heading"></div>
                     <div class="panel-body" id="demo-buttons">
+                        <!--restaurant info here-->
+                        <h4>
+                            The restaurant info that will be displayed in Wechat mini program
+                        </h4>
+                        <h4>此处的餐厅信息将显示在微信小程序内</h4>
                         <div class="row">
-                            
-                        </div>
-                        <div class="success">
 
                         </div>
+
+                        <br />
+                        <br />
 
                         <div class="Edit">
+                            <h4>Edit Info</h4>
+
                             <label>Restaurant name - 餐厅名称</label>
                             <input type="text" id="rest_name_signup" class="span3">
                             <label>Address - 餐厅地址</label>
@@ -84,12 +90,134 @@
                             <label>Owner - 拥有者</label>
                             <input type="text" id="owner_signup" class="span3">
                             <br />
+                            <br />
                             <input type="submit" onclick="return updateInfo()" value="Update Info" class="btn btn-primary span3 submit">
                         </div>
+
+                        <br />
+                        <br />
+
+                        <!--payment success here-->
+                        <div class="success"></div>
                     </div>
                 </div>
             </div>
         </div>
         
+
+        <script>
+            var restaurantInfo;
+
+            function updateInfo() {
+                console.log(restaurantInfo);
+
+                var name = $('#rest_name_signup').val();
+                var location = $('#rest_location_signup').val();
+                var phone = $('#phone_signup').val();
+                var owner = $('#owner_signup').val();
+
+                if (name && name !== "") {
+                    restaurantInfo.name = name;
+                }
+                if (location && location !== "") {
+                    restaurantInfo.location = location;
+                }
+                if (phone && phone !== "") {
+                    restaurantInfo.phone = phone;
+                }
+                if (owner && owner !== "") {
+                    restaurantInfo.owner = owner;
+                }
+
+                var body = {
+                    "Name": restaurantInfo.name,
+                    "Location": restaurantInfo.location,
+                    "Owner": restaurantInfo.owner,
+                    "Phone": restaurantInfo.phone,
+                    "CloverId": restaurantInfo.cloverId
+                }
+
+                console.log(restaurantInfo);
+
+                $.ajax({
+                    url: '/api/v1/restaurants/edit',
+                    type: 'POST',
+                    dataType: 'text',
+                    data: JSON.stringify(body),
+                    async: false,
+                    contentType: 'application/json',
+                    success: function (data) {
+                        console.log(data);
+
+                        alert("Update info success - 成功更新信息")
+                        $(window).attr('location', 'dashboard.html');
+                    },
+                    fail: function (jqXHR, textStatus, err) {
+                        alert("Please try again later - 系统繁忙，请稍后再试");
+                    },
+                    complete: function (response, text) {
+                        //alert("Update failed - 系统繁忙，请稍后再试");
+                    }
+                })
+            }
+
+            $(document).ready(function () {
+                var username = sessionStorage.getItem("username");
+                if (username) {
+                    $(".display_username").append(username);
+                } else {
+                    $(window).attr('location', 'index.html');
+                    return;
+                }
+
+
+                $(".fa-sign-out").click(function () {
+                    sessionStorage.clear();
+                    $(window).attr('location', 'index.html');
+                    return;
+                });
+
+                var uri = '/api/v1/restaurants/user/' + username;
+                console.log(uri);
+
+                $.getJSON(uri)
+                    .done(function (data) {
+                        restaurantInfo = data;
+                        console.log(data);
+
+                        $('#name').append(data.name);
+                        var html = '<p id="address">餐厅地址 - Location:' + data.location + '</p>';
+                        html += '<p id="owner">老板 - Owner:' + data.owner + '</p>';
+                        html += '<p id="phone">联系电话 - Phone:' + data.phone + "</p>";
+                        if (username === "Admin") {
+                            html += '<input id="amount" type="text" name="发放金额: $">';
+                            html += '<input id="sendId" type="text" name="接受金额的商家id：">';
+                            html += '<button id="send">确认发放</button>'
+                        }
+                        $('.row').html(html);
+                        sessionStorage.setItem("userId", data.id);
+                    })
+                    .fail(function (jqXHR, textStatus, err) {
+                        alert("系统繁忙，请稍后再试");
+                    });
+
+                $('#send').click(function () {
+                    var amount = parseInt($("#amount").val());
+                    var id = parseInt($("#sendId").val());
+                    $.ajax({
+                        url: '/api/v1/admin/outstandingbalance?restaurantId=' + id + '&amount=' + amount,
+                        type: 'POST',
+                        async: true,
+                        success: function (data) {
+                            var html = "<p>放款成功</p>";
+                            $('.success').html(html);
+                        },
+                        fail: function (jqXHR, textStatus, err) {
+                            alert("系统繁忙，请稍后再试");
+                        },
+                    })
+                });
+            });
+        </script>
     </body>
 </html>

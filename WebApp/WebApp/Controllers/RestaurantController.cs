@@ -47,7 +47,7 @@ namespace WebApp.Controllers
                 var admin = context.Admins.FirstOrDefault(a => a.Username == username);
                 if (admin != null)
                 {
-                    var res = context.Restaurants.FirstOrDefault(r => r.Name.Equals(admin.RestaurantName));
+                    var res = context.Restaurants.FirstOrDefault(r => r.CloverId.Equals(admin.Username));
 
                     if (res != null)
                     {
@@ -57,6 +57,31 @@ namespace WebApp.Controllers
                     {
                         return Ok(GetErrorModel(ApiErrorCode.RestaurantDoesNotExist));
                     }
+                }
+                else
+                {
+                    return Ok(GetErrorModel(ApiErrorCode.RestaurantDoesNotExist));
+                }
+            }
+        }
+
+        [Route("edit")]
+        [HttpPost]
+        public IHttpActionResult EditRestaurantInfo([FromBody] Restaurant restaurant)
+        {
+            using (var context = new TasteContext())
+            {
+                var res = context.Restaurants.FirstOrDefault(r => r.CloverId == restaurant.CloverId);
+                if (res != null)
+                {
+                    res.Location = restaurant.Location;
+                    res.Name = restaurant.Name;
+                    res.Owner = restaurant.Owner;
+                    res.Phone = restaurant.Phone;
+
+                    context.SaveChanges();
+
+                    return Json("Success");
                 }
                 else
                 {

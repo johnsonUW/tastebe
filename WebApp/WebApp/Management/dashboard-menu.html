@@ -90,7 +90,6 @@
             <span class="pull-right">&copy; TastyMenu</span>
         </footer>
     </div>
-    <script src="assets/js/lib/jquery-2.1.3.min.js"></script>
     <script src="assets/js/jquery.mousewheel.min.js"></script>
     <script src="assets/js/jquery.cookie.min.js"></script>
     <script src="assets/js/fastclick.min.js"></script>
@@ -114,17 +113,25 @@
             });
 
             $('#sync').click(function () {
-                $.ajax({
-                    url: '/api/v1/admin/sync',
-                    type: 'post',
-                    contentType: false,
-                    processData: false,
-                    success: function (e) {
+                var urll = '/api/v1/admin/sync';
+                //$.ajax({
+                //    url: '/api/v1/admin/sync',
+                //    type: 'post',
+                //    contentType: false,
+                //    processData: false,
+                //    success: function (e) {
+                //        $('#sync_succ').append("Success - 同步成功！");
+                //    }
+                //});
+
+                $.getJSON(urll)
+                    .done(function (data) {
                         $('#sync_succ').append("Success - 同步成功！");
-                    }
-                });
+                    })
+                    .fail(function (jqXHR, textStatus, err) {
+                        alert("Please try again later - 系统繁忙，请稍后再试");
+                    });
             });
-            
 
             var id = sessionStorage.getItem("userId");
             $.getJSON(cui_cate_uri).done(function (cuisineCategories) {

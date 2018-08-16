@@ -49,7 +49,7 @@ namespace WebApp.Controllers
                 context.Restaurants.Add(new Restaurant()
                 {
                     CloverId = signup.username,
-                    Name = "",
+                    Name = signup.username,
                     Location = "",
                     Phone = "",
                     Owner = "",
@@ -123,7 +123,7 @@ namespace WebApp.Controllers
 
         [HttpGet]
         [Route("login")]
-        public IHttpActionResult LoginAccount(string username, string password)
+        public IHttpActionResult LoginAccount(string username, string password, string fromClover = "false")
         {
             using (var context = new TasteContext())
             {
@@ -133,13 +133,27 @@ namespace WebApp.Controllers
                     return Unauthorized();
                 }
 
-                if (password.Equals(user.Password))
+                if (fromClover.Equals("false"))
                 {
-                    return Ok("Success");
+                    // check password, else just let it go
+                    if (password.Equals(user.Password))
+                    {
+                        return Ok("Success");
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
                 }
                 else
                 {
-                    return Unauthorized();
+                    // update password and restaurant's accesstoken
+                    user.Password = password;
+                    var res = context.Restaurants.FirstOrDefault(r => r.CloverId.Equals(username));
+                    res.AccessToken = password;
+                    context.SaveChanges();
+
+                    return Ok("Success");
                 }
             }
         }
