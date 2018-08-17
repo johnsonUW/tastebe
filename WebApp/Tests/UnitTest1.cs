@@ -38,13 +38,13 @@ namespace Tests
         [TestMethod]
         public async Task QrCode()
         {
-            //var stream = await WeChatHttpClient.GetMiniProgramQrCodeAsync("1", "wx85137f0c169973eb",
-            //    "b2650954994f5992688bd88a33ec51a6");
-            //using (var fileStream = File.Create("C:\\qrcodes\\1.png"))
-            //{
-            //    stream.Seek(0, SeekOrigin.Begin);
-            //    stream.CopyTo(fileStream);
-            //}
+            var stream = await WeChatHttpClient.GetMiniProgramQrCodeAsync("36", "1", "wx85137f0c169973eb",
+                "b2650954994f5992688bd88a33ec51a6");
+            using (var fileStream = File.Create("C:\\wx-qr-code.png"))
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+                stream.CopyTo(fileStream);
+            }
         }
     }
 }
