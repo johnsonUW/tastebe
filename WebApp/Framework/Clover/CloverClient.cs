@@ -24,11 +24,18 @@ namespace Framework.Clover
 
         public static async Task<List<CloverItemModel>> GetItemsAsync(string accessToken, string merchantId, bool sandboxMode = false)
         {
-            if (accessToken == null) return new List<CloverItemModel>();
-            var client = GetClient(sandboxMode, accessToken);
-            var response = await client.GetAsync($"v3/merchants/{merchantId}/items");
-            var model = await response.ProcessReponse<CloverMenuModel>();
-            return model.Elements;
+            try
+            {
+                if (accessToken == null) return new List<CloverItemModel>();
+                var client = GetClient(sandboxMode, accessToken);
+                var response = await client.GetAsync($"v3/merchants/{merchantId}/items");
+                var model = await response.ProcessReponse<CloverMenuModel>();
+                return model.Elements;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public static async Task<CloverOrderCreatedResponseModel> CreateOrderAsync(List<CloverLineItemModel> items, string accessToken,

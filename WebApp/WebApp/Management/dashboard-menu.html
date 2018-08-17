@@ -76,7 +76,7 @@
                     <div>
                         <!--<input type="text" id="prodId" size="5" />-->
 
-                        <input style="background-color:#129999; color: white;padding:10px" type="button" value="保存修改" onclick="edit();" />
+                        <input style="background-color:#129999; color: white;padding:10px" type="button" value="Save edits - 保存修改" onclick="edit();" />
                         <br/>
                         <br />
                         <br />
@@ -114,79 +114,24 @@
 
             $('#sync').click(function () {
                 var urll = '/api/v1/admin/sync';
-                //$.ajax({
-                //    url: '/api/v1/admin/sync',
-                //    type: 'post',
-                //    contentType: false,
-                //    processData: false,
-                //    success: function (e) {
-                //        $('#sync_succ').append("Success - 同步成功！");
-                //    }
-                //});
-
                 $.getJSON(urll)
                     .done(function (data) {
-                        $('#sync_succ').append("Success - 同步成功！");
+                        //$('#sync_succ').append("Success - 同步成功！");
+                        alert("Success - 同步成功！");
+                        $(window).attr('location', 'dashboard-menu.html');
                     })
                     .fail(function (jqXHR, textStatus, err) {
                         alert("Please try again later - 系统繁忙，请稍后再试");
                     });
             });
 
-            var id = sessionStorage.getItem("userId");
+            console.log(cui_cate_uri);
             $.getJSON(cui_cate_uri).done(function (cuisineCategories) {
-                
-                // [
-                //     {
-                //         "id": 1,
-                //         "name": "川菜",
-                //         "taste": "辣"
-                //     },
-                //     {
-                //         "id": 2,
-                //         "name": "甜品",
-                //         "taste": "甜"
-                //     }
-                // ]
-
-
-
-                // [
-                //     {
-                //         "cuisine": {
-                //             "id": 2,
-                //             "name": "甜品"
-                //         },
-                //         "items": [
-                //             {
-                //                 "id": 1,
-                //                 "restaurantId": 1,
-                //                 "cuisineId": 2,
-                //                 "name": "Latte1",
-                //                 "description": "A good cup of latt1e",
-                //                 "flavors": "Refreshing1",
-                //                 "ingredients": "Latte bean1s",
-                //                 "category": "Coffee",
-                //                 "price": 4.1
-                //             },
-                //             {
-                //                 "id": 2,
-                //                 "restaurantId": 1,
-                //                 "cuisineId": 2,
-                //                 "name": "Mocha1",
-                //                 "description": "Elegant mocha",
-                //                 "flavors": "Refreshing",
-                //                 "ingredients": "Mocha beans",
-                //                 "category": "Coffee",
-                //                 "price": 3.9
-                //             }
-                //         ]
-                //     }
-                // ]
-
-                $.getJSON(uri + '/' + id)
+                var newUrl = uri + '/' + sessionStorage.getItem("userId");
+                console.log(newUrl);
+                $.getJSON(newUrl)
                     .done(function (data) {
-                        
+                        console.log(data);
                         var html = '<table id="mainTable">';
                         html += '<tr><th>Dish name - 菜名</th><th>Category - 分类</th><th>Cuisine - 菜系</th><th>Description - 描述</th><th>Flavor - 口味</th><th>Ingredients - 原料</th><th>Price - 价格</th><th>Image - 图片</th></tr>';
                         $.each(data, function (key, item) {
@@ -331,7 +276,7 @@
                     dataType: 'json',
                     data: data
                 }).done(function (res) {
-                    
+                    alert("Save success");
                 }).fail(function (err) {
                     alert("Please try again later - 系统繁忙，请稍后再试");
                 })
