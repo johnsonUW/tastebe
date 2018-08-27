@@ -90,13 +90,13 @@
             <span class="pull-right">&copy; TastyMenu</span>
         </footer>
     </div>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
     <script src="assets/js/jquery.mousewheel.min.js"></script>
     <script src="assets/js/jquery.cookie.min.js"></script>
     <script src="assets/js/fastclick.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/clearmin.min.js"></script>
     <script src="assets/js/demo/home.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
     <script src="assets/js/tableEditor.js"></script>
     <script>
         var uri = '/api/v1/menu';
@@ -125,10 +125,9 @@
                     });
             });
 
-            console.log(cui_cate_uri);
             $.getJSON(cui_cate_uri).done(function (cuisineCategories) {
                 var newUrl = uri + '/' + sessionStorage.getItem("userId");
-                console.log(newUrl);
+
                 $.getJSON(newUrl)
                     .done(function (data) {
                         console.log(data);
@@ -154,13 +153,13 @@
                                 html += '<td class ="name">' + dish.name + '</td>';
                                 html += '<td class = "category">' + dish.category + '</td>';
                                 // html += '<td class = "cuisine">' + dish.cuisine + '</td>';
-                                html += '<td class = "cuisine">' + _cui_html + '</td>';
+                                html += '<td class = "cuisine" disabled>' + _cui_html + '</td>';
                                 html += '<td class = "description">' + dish.description + '</td>';
                                 html += '<td class = "flavors">' + dish.flavors + '</td>';
                                 html += '<td class = "ingredients">' + dish.ingredients + '</td>';
                                 html += '<td class = "price">' + dish.price + '</td>';
                                 
-                                html += '<td class = "image"> <input type="file" value="Choose image - 点击上传图片"><button type="button" id="upload">Upload - 开始上传</button><div id = "imgPath"><p">Url - 图片地址: <span>' + (typeof dish.imageUrl === 'undefined'?'':dish.imageUrl) + '</span></p></div></td>';
+                                html += '<td class = "image" disabled> <input type="file" value="Choose image - 点击上传图片"><button type="button" id="upload">Upload - 开始上传</button><div id = "imgPath" disabled><p disabled>Url - 图片地址: <span disabled>' + (typeof dish.imageUrl === 'undefined'?'':dish.imageUrl) + '</span></p></div></td>';
                                 html += '</tr>';
                                 imgUrl.push(data.imageUrl);
                             });
@@ -190,7 +189,6 @@
         function uploadImg(event) {
 
             var file = $('input[type="file"]').prop('files')[0]
-
             var formData = new FormData();
             formData.append('image', file);
             

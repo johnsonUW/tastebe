@@ -1,6 +1,14 @@
 ﻿/*global $, window*/
 $.fn.editableTableWidget = function (options) {
 	'use strict';
+
+	/* disable <td> element editable by adding disabled attribute on <td> element and its children element */
+	function checkEditEnable(select) {
+		if (select.target && select.target.hasAttribute('disabled')) {
+			return false
+		}
+		return true
+	}
 	return $(this).each(function () {
 		var buildDefaultOptions = function () {
 				var opts = $.extend({}, $.fn.editableTableWidget.defaultOptions);
@@ -12,7 +20,10 @@ $.fn.editableTableWidget = function (options) {
 			element = $(this),
 			editor = activeOptions.editor.css('position', 'absolute').hide().appendTo(element.parent()),
 			active,
-			showEditor = function (select) {
+            showEditor = function (select) {
+              if(!checkEditEnable(select)){
+								return
+							}
 				active = element.find('td:focus');
 				if (active.length) {
 					editor.val(active.text())
@@ -58,6 +69,9 @@ $.fn.editableTableWidget = function (options) {
 			editor.hide();
 		}).keydown(function (e) {
 			if (e.which === ENTER) {
+				if(!checkEditEnable(e)){
+					return
+				}
 				setActiveText();
 				editor.hide();
 				active.focus();
@@ -92,13 +106,20 @@ $.fn.editableTableWidget = function (options) {
 		element.on('click keypress dblclick', showEditor)
 		.css('cursor', 'pointer')
 		.keydown(function (e) {
+			
 			var prevent = true,
 				possibleMove = movement($(e.target), e.which);
 			if (possibleMove.length > 0) {
 				possibleMove.focus();
 			} else if (e.which === ENTER) {
+				if(!checkEditEnable(e)){
+					return
+				}
 				showEditor(false);
 			} else if (e.which === 17 || e.which === 91 || e.which === 93) {
+				if(!checkEditEnable(e)){
+					return
+				}
 				showEditor(true);
 				prevent = false;
 			} else {
