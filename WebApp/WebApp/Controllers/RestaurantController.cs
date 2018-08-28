@@ -47,7 +47,7 @@ namespace WebApp.Controllers
                 var admin = context.Admins.FirstOrDefault(a => a.Username == username);
                 if (admin != null)
                 {
-                    var res = context.Restaurants.FirstOrDefault(r => r.CloverId.Equals(admin.Username));
+                    var res = context.Restaurants.FirstOrDefault(r => r.Name.Equals(admin.RestaurantName));
 
                     if (res != null)
                     {
