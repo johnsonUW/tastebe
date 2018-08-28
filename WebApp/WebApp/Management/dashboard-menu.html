@@ -113,6 +113,8 @@
             });
 
             $('#sync').click(function () {
+                alert("Syncing in progress, estimate time ~30 seconds. Another popup message will appear.");
+
                 var urll = '/api/v1/admin/sync';
                 $.getJSON(urll)
                     .done(function (data) {
@@ -203,9 +205,7 @@
                 contentType: false,
                 processData: false,
                 success: function (e) {
-                    /* Url - 图片地址: <span disabled>' + (typeof dish.imageUrl === 'undefined'?'':dish.imageUrl) + '</span> */
-                    $('#imgPath').append('<p disabled>Url - 图片地址: <span disabled>' + e + '</span></p>')
-                    // $(event.target).siblings('#imgPath').children().find('span').text(e)
+                    $('#imgPath').append('<p disabled>Update image success. Please click "Save Edits" to save: 图片上传成功,点击保存修改完成修改</p>')
                 }
             })
         }
@@ -236,7 +236,6 @@
             var _mCuisineID = $('.cuisine-cate option:selected');
             var i = 1;
 
-
             /* 
                 "id": 0,
                 "restaurantId": 0,
@@ -251,7 +250,6 @@
                 // "deleted": true,
                 "cloverId": "string"
             */
-            var failure = false;
             // name category cuisine description flavors ingredients price, imageUrl
             while (i < _mDishData.length && i < (_dishData.length + 1)) {
                 var _data = _mDishData[i];
@@ -279,13 +277,11 @@
                     dataType: 'json',
                     data: data
                 }).fail(function (err) {
-                    failure = true;
                     alert("Please try again later - 系统繁忙，请稍后再试");
                 })
                 i++;
             }
             alert("Save success! - 保存成功！");
-
         }
     </script>
 </body>

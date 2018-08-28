@@ -71,6 +71,10 @@
                             The restaurant info that will be displayed in Wechat mini program
                         </h4>
                         <h4>此处的餐厅信息将显示在微信小程序内</h4>
+
+                        <br/>
+                        <hr/>
+
                         <div class="row">
 
                         </div>
@@ -177,7 +181,7 @@
                     return;
                 });
 
-                var uri = '/api/v1/restaurants/user/' + username;
+                var uri = '/api/v1/restaurants/userinfo/' + username;
                 console.log(uri);
 
                 $.getJSON(uri)

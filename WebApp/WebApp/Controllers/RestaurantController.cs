@@ -65,6 +65,33 @@ namespace WebApp.Controllers
             }
         }
 
+        [Route("userinfo/{username}")]
+        [HttpGet]
+        public IHttpActionResult GetRestaurantInfoByUserId(string username)
+        {
+            using (var context = new TasteContext())
+            {
+                var admin = context.Admins.FirstOrDefault(a => a.Username == username);
+                if (admin != null)
+                {
+                    var res = context.Restaurants.FirstOrDefault(r => r.CloverId.Equals(admin.Username));
+
+                    if (res != null)
+                    {
+                        return Ok(ToModel(res));
+                    }
+                    else
+                    {
+                        return Ok(GetErrorModel(ApiErrorCode.RestaurantDoesNotExist));
+                    }
+                }
+                else
+                {
+                    return Ok(GetErrorModel(ApiErrorCode.RestaurantDoesNotExist));
+                }
+            }
+        }
+
         [Route("edit")]
         [HttpPost]
         public IHttpActionResult EditRestaurantInfo([FromBody] Restaurant restaurant)
