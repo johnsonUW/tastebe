@@ -130,7 +130,6 @@
 
                 $.getJSON(newUrl)
                     .done(function (data) {
-                        console.log(data);
                         var html = '<table id="mainTable">';
                         html += '<tr><th>Dish name - 菜名</th><th>Category - 分类</th><th>Cuisine - 菜系</th><th>Description - 描述</th><th>Flavor - 口味</th><th>Ingredients - 原料</th><th>Price - 价格</th><th>Image - 图片</th></tr>';
                         $.each(data, function (key, item) {
@@ -159,7 +158,9 @@
                                 html += '<td class = "ingredients">' + dish.ingredients + '</td>';
                                 html += '<td class = "price">' + dish.price + '</td>';
                                 
-                                html += '<td class = "image" disabled> <input type="file" value="Choose image - 点击上传图片"><button type="button" id="upload">Upload - 开始上传</button><div id = "imgPath" disabled><p disabled>Url - 图片地址: <span disabled>' + (typeof dish.imageUrl === 'undefined'?'':dish.imageUrl) + '</span></p></div></td>';
+                                html += '<td class = "image" disabled> <input type="file" value="Choose image - 点击上传图片"><button type="button" id="upload">Upload - 开始上传</button><div id = "imgPath" disabled></div></td>';
+                                /* default hide image url */
+                                // html += '<td class = "image" disabled> <input type="file" value="Choose image - 点击上传图片"><button type="button" id="upload">Upload - 开始上传</button><div id = "imgPath" disabled><p disabled>Url - 图片地址: <span disabled>' + (typeof dish.imageUrl === 'undefined'?'':dish.imageUrl) + '</span></p></div></td>';
                                 html += '</tr>';
                                 imgUrl.push(data.imageUrl);
                             });
@@ -188,7 +189,10 @@
 
         function uploadImg(event) {
 
-            var file = $('input[type="file"]').prop('files')[0]
+            var file = $(event.target).siblings('input[type=file]').prop('files')[0]
+            if (typeof file === 'undefined') {
+                return 
+            }
             var formData = new FormData();
             formData.append('image', file);
             
@@ -199,8 +203,9 @@
                 contentType: false,
                 processData: false,
                 success: function (e) {
-                    // $('#imgPath').append('<p>图片地址: <span>' + e + '</span></p>')
-                    $(event.target).siblings('#imgPath').children().find('span').text(e)
+                    /* Url - 图片地址: <span disabled>' + (typeof dish.imageUrl === 'undefined'?'':dish.imageUrl) + '</span> */
+                    $('#imgPath').append('<p disabled>Url - 图片地址: <span disabled>' + e + '</span></p>')
+                    // $(event.target).siblings('#imgPath').children().find('span').text(e)
                 }
             })
         }
