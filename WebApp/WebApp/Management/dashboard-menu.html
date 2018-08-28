@@ -251,7 +251,7 @@
                 // "deleted": true,
                 "cloverId": "string"
             */
-
+            var failure = false;
             // name category cuisine description flavors ingredients price, imageUrl
             while (i < _mDishData.length && i < (_dishData.length + 1)) {
                 var _data = _mDishData[i];
@@ -278,13 +278,13 @@
                     type: "POST",
                     dataType: 'json',
                     data: data
-                }).done(function (res) {
-                    alert("Save success");
                 }).fail(function (err) {
+                    failure = true;
                     alert("Please try again later - 系统繁忙，请稍后再试");
                 })
                 i++;
             }
+            alert("Save success! - 保存成功！");
 
         }
     </script>
