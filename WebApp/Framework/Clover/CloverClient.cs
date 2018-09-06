@@ -44,7 +44,8 @@ namespace Framework.Clover
             var client = GetClient(sandboxMode, accessToken);
             var data = new CloverCreateOrderModel
             {
-                LineItems = items
+                LineItems = items,
+                State = "open"
             }.ToJson();
             var response = await client.PostAsync($"v3/merchants/{merchantId}/orders", new StringContent(data));
             var model = await response.ProcessReponse<CloverOrderCreatedResponseModel>();

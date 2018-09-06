@@ -9,5 +9,7 @@ namespace Framework.Clover
         [JsonProperty("total")]
         public int Total => LineItems.Sum(l => l.PriceInPennies * l.UnitQuantity);
         public List<CloverLineItemModel> LineItems { get; set; }
+        [JsonProperty("state")]
+        public string State { get; set; }
     }
 }
